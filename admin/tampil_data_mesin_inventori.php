@@ -13,6 +13,8 @@
     <!-- Custom styles for this template -->
     <link href="../assets/css/style.css" rel="stylesheet">
     <link href="../assets/css/style-responsive.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../assets/datatables/datatables.css">
+
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -96,7 +98,7 @@
                   <hr>
 
                   <div>
-                    <a href="tambah_data_mesin_inventori.php" class="btn btn-primary" style="float: right;">Tambah Mesin Inventori</a>
+                    <a href="tambah_data_mesin_inventori.php" class="btn btn-primary" style="float: right; margin-bottom:20px">Tambah Mesin Inventori</a>
                   </div>
                   <div class="clearfix"></div>
                   <!-- DIV TABLE -->
@@ -192,26 +194,38 @@
     <!--common script for all pages-->
     <script src="../assets/js/common-scripts.js"></script>
 
+    <!-- datatables -->
+    <script type="text/javascript" charset="utf8" src="../assets/datatables/datatables.js"></script>
+
+
     <!--script for this page-->
 
   <script>
       //custom select box
 
-      $(function(){
-          $('select.styled').customSelect();
-      });
+      $(document).ready( function () {
+          $('.table').DataTable();
 
-      function konfirmasiHapus(){
+          $(function(){
+              $('select.styled').customSelect();
+          });
 
-        var konfirmasi = confirm("Apakah Anda yakin akan menghapus data ini?");
-        if(konfirmasi){
-          return true;
-        }else{
-          return false;
-        }
+          //fungsi untuk melakukan konfirmasi penghapusan
+          function konfirmasiHapus(){
 
-        return;
-      }
+            var konfirmasi = confirm("Apakah Anda yakin akan menghapus data ini?");
+            if(konfirmasi){
+              return true;
+            }else{
+              return false;
+            }
+
+            return;
+          }
+
+      } );
+
+
 
   </script>
 
