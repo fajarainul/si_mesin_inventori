@@ -1,0 +1,2 @@
+//BUAT TABEL JENIS MESIN
+CREATE TABLE `si_mesin_inventori`.`tb_jenis_mesin` ( `id_jenis_mesin` INT NOT NULL AUTO_INCREMENT , `nama_jenis_mesin` VARCHAR(64) NOT NULL , `kode_jenis_mesin` VARCHAR(8) NOT NULL , `date_created` TIMESTAMP NOT NULL , PRIMARY KEY (`id_jenis_mesin`)) ENGINE = InnoDB;
