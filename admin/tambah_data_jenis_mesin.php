@@ -97,17 +97,17 @@
                   <hr>
                   <!-- DIV FORMS -->
                   <div>
-                    <form>
+                    <form method="POST" action="proses_jenis_mesin.php?aksi=insert">
                       <div class="form-group row">
                         <label for="jenisMesin" class="col-sm-4 col-form-label">Nama Jenis Mesin</label>
                         <div class="col-sm-8">
-                          <input type="text" class="form-control" id="jenisMesin" placeholder="Nama Jenis Mesin">
+                          <input type="text" class="form-control" name="namaMesin" id="jenisMesin" placeholder="Nama Jenis Mesin" required="required">
                         </div>
                       </div>
                       <div class="form-group row">
                         <label for="kodeMesin" class="col-sm-4 col-form-label">Kode Jenis Mesin</label>
                         <div class="col-sm-8">
-                          <input type="text" class="form-control" id="kodeMesin" placeholder="Kode Mesin">
+                          <input type="text" class="form-control" name="kodeMesin" id="kodeMesin" placeholder="Kode Mesin" required="required">
                         </div>
                       </div>
                       <div class="form-group row">
