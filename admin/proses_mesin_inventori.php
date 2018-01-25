@@ -31,9 +31,17 @@ switch ($aksi){
 
     case 'edit':
 
-        $mesinInventoriModel->setNamaJenisMesin($_POST['namaMesin']);
-        $mesinInventoriModel->setKodeJenisMesin($_POST['kodeMesin']);
-        $mesinInventoriModel->setIdJenisMesin($_GET['id']);
+        $tglMasuk = $_POST['tanggalMasukMesinInventori'];
+
+        $tglMasuk = date("Y-m-d", strtotime($tglMasuk) );
+
+        $mesinInventoriModel->setNomorMesinInventori($_POST['nomorMesinInventori']);
+        $mesinInventoriModel->setIdJenisMesin($_POST['jenisMesinInventori']);
+        $mesinInventoriModel->setLokasiMesinInventori($_POST['lokasiMesinInventori']);
+        $mesinInventoriModel->setStatusMesinInventori($_POST['statusMesinInventori']);
+        $mesinInventoriModel->setTanggalMasukMesinInventori($tglMasuk);
+        $mesinInventoriModel->setIdMesinInventori($_GET['id']);
+
 
         $result = $mesinInventoriController->update($mesinInventoriModel);
 

@@ -63,7 +63,7 @@ class MesinInventoriController{
 
         if($this->checkIfDataExist($mesinInventoriModel)){
 
-            $update = $this->connection->query('UPDATE '.$this->tbMesinInventori.' SET kode_jenis_mesin="'.$mesinInventoriModel->getKodeJenisMesin().'", nama_jenis_mesin="'.$mesinInventoriModel->getNamaJenisMesin().'" WHERE id_jenis_mesin='.$mesinInventoriModel->getIdJenisMesin().'');
+            $update = $this->connection->query('UPDATE '.$this->tbMesinInventori.' SET nomor_mesin_inventori="'.$mesinInventoriModel->getNomorMesinInventori().'", id_jenis_mesin="'.$mesinInventoriModel->getIdJenisMesin().'", lokasi_mesin_inventori ="'.$mesinInventoriModel->getLokasiMesinInventori().'", status_mesin_inventori ="'.$mesinInventoriModel->getStatusMesinInventori().'", tanggal_masuk_mesin_inventori="'.$mesinInventoriModel->getTanggalMasukMesinInventori().'" WHERE id_mesin_inventori = '.$mesinInventoriModel->getIdMesinInventori());
 
             if(!$update){
                 die("Query gagal : ".$this->connection->error);

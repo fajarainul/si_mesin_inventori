@@ -90,10 +90,17 @@ include '_header.php';
                                         if($data->getStatusMesinInventori()==1){
                                             $classLabel = "primary";
                                             $statusText = "Baik";
-                                        }else if($data->getStatusMesinInventori()==2){
+                                        }else if($data->getStatusMesinInventori()==2) {
                                             $classLabel = "warning";
                                             $statusText = "Perlu Perbaikan";
-                                        }else if($data->getStatusMesinInventori()==5){
+                                        }else if($data->getStatusMesinInventori()==3){
+                                            $classLabel = "info";
+                                            $statusText = "Sedang Diperbaiki";
+                                        }else if($data->getStatusMesinInventori()==4){
+                                            $classLabel = "success";
+                                            $statusText = "Selesai Diperbaiki";
+                                        }
+                                        else if($data->getStatusMesinInventori()==5){
                                             $classLabel = "danger";
                                             $statusText ="Rusak Total";
                                         }
@@ -111,10 +118,9 @@ include '_header.php';
                                         echo "<td>" . $tglMasuk . "</td>";
 
                                         echo "<td>
-                                                        <a href=\"ubah_data_mesin_inventori.php\" class=\"btn btn-primary btn-xs\"><i
-                                                    class=\"fa fa-pencil\"></i></a>
-                                                        <a href=\"hapus_data_mesin_inventori.php\" class=\"btn btn-danger btn-xs\"
-                                                    onclick=\"return konfirmasiHapus()\"><i class=\"fa fa-trash-o \"></i></a>
+                                                        <a href=\"ubah_data_mesin_inventori.php?no_mesin=".$data->getNomorMesinInventori()."&id_jenis_mesin=".$data->getIdJenisMesin()."&lokasi_mesin=".$data->getLokasiMesinInventori()."&id_mesin=".$data->getIdMesinInventori()."&tgl_masuk=".$data->getTanggalMasukMesinInventori()."&status_mesin=".$data->getStatusMesinInventori()."\" class=\"btn btn-primary btn-xs\"><i
+                                                        class=\"fa fa-pencil\"></i></a>
+                                                        <a href=\"hapus_data_mesin_inventori.php\" class=\"btn btn-danger btn-xs\" onclick=\"return konfirmasiHapus()\"><i class=\"fa fa-trash-o \"></i></a>
                                               </td>";
 
                                         echo "</tr>";

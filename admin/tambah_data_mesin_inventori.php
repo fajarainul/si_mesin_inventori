@@ -44,74 +44,80 @@ include '_header.php';
                                         Inventori</label>
                                     <div class="col-sm-4">
                                         <input type="text" class="form-control" id="nomorMesin"
-                                               name="nomorMesinInventori" placeholder="Nomor Mesin Inventori" required="required">
+                                               name="nomorMesinInventori" placeholder="Nomor Mesin Inventori"
+                                               required="required">
                                     </div>
 
                                     <label for="jenisMesin" class="col-sm-2 col-form-label">Jenis Mesin</label>
                                     <div class="col-sm-4">
-                                        <select class="form-control" id="jenisMesin" name="jenisMesinInventori" required="required">
+                                        <select class="form-control" id="jenisMesin" name="jenisMesinInventori"
+                                                required="required">
 
-                                        <?php
+                                            <?php
 
                                             $jenisMesinController = new JenisMesinController();
                                             $listData = $jenisMesinController->retrieve();
 
                                             while ($data = $listData->fetch_object(JenisMesinModel::class)) {
-                                                echo "<option value=".$data->getIdJenisMesin().">".$data->getNamaJenisMesin()."</option>";
+                                                echo "<option value=" . $data->getIdJenisMesin() . ">" . $data->getNamaJenisMesin() . "</option>";
                                             }
 
-                                        ?>
+                                            ?>
 
                                         </select>
+                                    </div>
                                 </div>
 
+                                <div class="form-group row">
+
+                                    <label for="lokasiMesin" class="col-sm-2 col-form-label">Lokasi Mesin
+                                        Inventori</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" id="lokasiMesin"
+                                               name="lokasiMesinInventori"
+                                               placeholder="Lokasi Mesin Inventori" required="required">
+                                    </div>
+
+                                    <label for="statusMesin" class="col-sm-2 col-form-label">Status Mesin</label>
+                                    <div class="col-sm-4">
+                                        <select class="form-control" id="statusMesin" name="statusMesinInventori"
+                                                required="required">
+                                            <option value="1">Baik</option>
+                                            <option value="2">Perlu Perbaikan</option>
+                                            <option value="5">Rusak Total</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+
+                                <div class="form-group row">
+
+                                    <label for="tglMasuk" class="col-sm-2 col-form-label">Tanggal Masuk</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control datepicker" id="tglMasuk"
+                                               name="tanggalMasukMesinInventori"
+                                               placeholder="Tanggal Masuk" required="required">
+                                    </div>
+
+                                    <!--<label for="tglKeluar" class="col-sm-2 col-form-label">Tanggal Keluar</label>
+                                    <div class="col-sm-4">
+                                      <input type="text" class="form-control" id="tglKeluar" placeholder="Tanggal Keluar" name="tglKeluar">
+                                    </div>-->
+
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-sm-12">
+                                        <button type="submit" class="btn btn-primary" style="float: right;">Simpan
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
+                        <!-- END DIV FORMS -->
 
-                        <div class="form-group row">
-
-                            <label for="lokasiMesin" class="col-sm-2 col-form-label">Lokasi Mesin Inventori</label>
-                            <div class="col-sm-4">
-                                <input type="text" class="form-control" id="lokasiMesin" name="lokasiMesinInventori"
-                                       placeholder="Lokasi Mesin Inventori" required="required">
-                            </div>
-
-                            <label for="statusMesin" class="col-sm-2 col-form-label">Status Mesin</label>
-                            <div class="col-sm-4">
-                                <select class="form-control" id="statusMesin" name="statusMesinInventori" required="required">
-                                    <option value="1">Baik</option>
-                                    <option value="2">Perlu Perbaikan</option>
-                                    <option value="5">Rusak Total</option>
-                                </select>
-                            </div>
-
-                        </div>
-
-                        <div class="form-group row">
-
-                            <label for="tglMasuk" class="col-sm-2 col-form-label">Tanggal Masuk</label>
-                            <div class="col-sm-4">
-                                <input type="text" class="form-control datepicker" id="tglMasuk" name="tanggalMasukMesinInventori"
-                                       placeholder="Tanggal Masuk" required="required">
-                            </div>
-
-                            <!--<label for="tglKeluar" class="col-sm-2 col-form-label">Tanggal Keluar</label>
-                            <div class="col-sm-4">
-                              <input type="text" class="form-control" id="tglKeluar" placeholder="Tanggal Keluar" name="tglKeluar">
-                            </div>-->
-
-                        </div>
-
-                        <div class="form-group row">
-                            <div class="col-sm-12">
-                                <button type="submit" class="btn btn-primary" style="float: right;">Simpan</button>
-                            </div>
-                        </div>
-                        </form>
                     </div>
-                    <!-- END DIV FORMS -->
-
                 </div>
-            </div>
             </div>
 
         </section>
@@ -131,7 +137,7 @@ include '_js.php';
 
 <script>
 
-    $( document ).ready(function() {
+    $(document).ready(function () {
         $('.datepicker').datepicker({
             format: "dd MM yyyy"
         });
