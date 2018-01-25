@@ -1,2 +1,14 @@
 //BUAT TABEL JENIS MESIN
 CREATE TABLE `si_mesin_inventori`.`tb_jenis_mesin` ( `id_jenis_mesin` INT NOT NULL AUTO_INCREMENT , `nama_jenis_mesin` VARCHAR(64) NOT NULL , `kode_jenis_mesin` VARCHAR(8) NOT NULL , `date_created` TIMESTAMP NOT NULL , PRIMARY KEY (`id_jenis_mesin`)) ENGINE = InnoDB;
+
+
+//BUAT TABEL MESIN INVENTORI
+CREATE TABLE `si_mesin_inventori`.`tb_mesin_inventori` ( `id_mesin_inventori` INT NOT NULL AUTO_INCREMENT , `nomor_mesin_inventori` VARCHAR(32) NOT NULL , `lokasi_mesin_inventori` VARCHAR(8) NOT NULL , `status_mesin_inventori` VARCHAR(8) NOT NULL COMMENT 'status = 1 jika kondisi baik, status = 2 jika mesin perlu pebaikan, status = 3 jika mesin sedang diperbaiki, status = 4 jika mesin selesai diperbaiki, status = 5 jika mesin rusak total' , `tanggal_masuk_mesin_inventori` DATETIME NOT NULL , PRIMARY KEY (`id_mesin_inventori`)) ENGINE = InnoDB;
+
+//TAMBAH KOLOM JENIS MESIN PADA TABEL MESIN INVENTORI
+ALTER TABLE `tb_mesin_inventori` ADD `jenis_mesin_inventori` INT NOT NULL AFTER `nomor_mesin_inventori`;
+
+//EDIT NAMA KOLOM TABLE MESIN INVENTORI
+ALTER TABLE `tb_mesin_inventori` CHANGE `jenis_mesin_inventori` `id_jenis_mesin` INT(4) NOT NULL;
+
+

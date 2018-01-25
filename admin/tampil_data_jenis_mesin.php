@@ -82,7 +82,7 @@ include '_header.php';
                                     if($listData->num_rows<=0){
                                         echo "<tr><td colspan='4'></td>Data Jenis Mesin Kosong</tr>";
                                     }else{
-                                        $no = 0;
+                                        $no = 1;
                                         while ($data = $listData->fetch_object(JenisMesinModel::class)){
                                             echo "<tr>";
                                             echo "<td>".$no++."</td>";
@@ -91,12 +91,11 @@ include '_header.php';
                                             echo "<td>
                                                         <a href=\"ubah_data_jenis_mesin.php?id_jenis_mesin=".$data->getIdJenisMesin()."&nama_jenis_mesin=".$data->getNamaJenisMesin()."&kode_jenis_mesin=".$data->getKodeJenisMesin()."\" class=\"btn btn-primary btn-xs\"><i
                                                                     class=\"fa fa-pencil\"></i></a>
-                                                        <a href=\"hapus_data_jenis_mesin.php\" class=\"btn btn-danger btn-xs\"><i
+                                                        <a href=\"hapus_data_jenis_mesin.php\" class=\"btn btn-danger btn-xs\" onclick=\"return konfirmasiHapus()\"><i
                                                                     class=\"fa fa-trash-o \"></i></a>
                                                   </td>";
                                             echo "</tr>";
                                         }
-                                        die();
 
                                     }
 
@@ -118,7 +117,7 @@ include '_header.php';
 
 </section>
 <?php
-include '_footer.php.php';
+include '_footer.php';
 ?>
 
 <?php
@@ -129,11 +128,6 @@ include '_js.php';
 <!--script for this page-->
 
 <script>
-    //custom select box
-
-    $(function () {
-        $('select.styled').customSelect();
-    });
 
     function konfirmasiHapus() {
 
@@ -144,7 +138,6 @@ include '_js.php';
             return false;
         }
 
-        return;
     }
 
 </script>

@@ -10,3 +10,11 @@
 
 <!--common script for all pages-->
 <script src="../assets/js/common-scripts.js"></script>
+
+<script type="text/javascript" charset="utf8" src="../assets/datatables/datatables.js"></script>
+
+<script type="text/javascript" charset="utf8" src="../assets/js/bootstrap-datepicker.min.js"></script>
+
+<script>
+
+</script>

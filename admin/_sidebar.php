@@ -12,21 +12,21 @@
 
             <li>
                 <a href="tampil_data_jenis_mesin.php">
-                    <i class="fa fa-table"></i>
+                    <i class="fa fa-tags"></i>
                     <span>Data Jenis Mesin</span>
                 </a>
             </li>
 
             <li>
                 <a href="tampil_data_mesin_inventori.php">
-                    <i class="fa fa-dashboard"></i>
+                    <i class="fa fa-table"></i>
                     <span>Data Mesin Inventori</span>
                 </a>
             </li>
 
             <li>
                 <a href="tampil_data_mesin_sewa.php">
-                    <i class="fa fa-dashboard"></i>
+                    <i class="fa fa-table"></i>
                     <span>Data Mesin Sewa</span>
                 </a>
             </li>

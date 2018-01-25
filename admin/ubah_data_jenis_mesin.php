@@ -70,7 +70,7 @@ include '_header.php';
 
       <!--main content end-->
     <?php
-    include '_footer.php.php';
+    include '_footer.php';
     ?>
 
     <?php

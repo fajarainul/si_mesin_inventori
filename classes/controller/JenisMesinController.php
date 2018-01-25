@@ -72,7 +72,7 @@ class JenisMesinController{
 
     public function delete(JenisMesinModel $jenisMesinModel)
     {
-        // TODO: Implement delete() method.
+
     }
 
     public function checkIfDataExist(JenisMesinModel $jenisMesinModel){

@@ -10,14 +10,15 @@
 
     $jenisMesinController = new JenisMesinController();
     $jenisMesinModel = new JenisMesinModel();
+    $result = new Result();
 
-    switch ($aksi){
+
+switch ($aksi){
         case 'insert':
 
             $jenisMesinModel->setNamaJenisMesin($_POST['namaMesin']);
             $jenisMesinModel->setKodeJenisMesin($_POST['kodeMesin']);
 
-            $result = new Result();
             $result = $jenisMesinController->create($jenisMesinModel);
 
             break;
@@ -28,8 +29,14 @@
             $jenisMesinModel->setKodeJenisMesin($_POST['kodeMesin']);
             $jenisMesinModel->setIdJenisMesin($_GET['id']);
 
-            $result = new Result();
             $result = $jenisMesinController->update($jenisMesinModel);
+
+            break;
+
+        case 'delete':
+            $jenisMesinModel->setIdJenisMesin($_GET['id']);
+
+            $result = $jenisMesinController->delete($jenisMesinModel);
 
             break;
 
