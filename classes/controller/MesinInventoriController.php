@@ -7,6 +7,7 @@ class MesinInventoriController{
     var $connection;
     var $successInsert = "Tambah mesin inventori berhasil";
     var $successUpdate = "Ubah mesin inventori berhasil";
+    var $successDelete = "Hapus mesin inventori berhasil";
     var $errorNotUnique = "Nomor mesin inventori harus unik";
 
     var $tbMesinInventori = "tb_mesin_inventori";
@@ -22,7 +23,7 @@ class MesinInventoriController{
     {
         $result = new Result();
 
-        if($this->checkIfDataExist($mesinInventoriModel)){
+        if(!$this->checkIfDataExist($mesinInventoriModel)){
             $insert = $this->connection->query('INSERT into '.$this->tbMesinInventori.'(nomor_mesin_inventori, id_jenis_mesin, lokasi_mesin_inventori, status_mesin_inventori, tanggal_masuk_mesin_inventori) 
                         VALUES("'.$mesinInventoriModel->getNomorMesinInventori().'", "'.$mesinInventoriModel->getIdJenisMesin().'","'.$mesinInventoriModel->getLokasiMesinInventori().'", "'.$mesinInventoriModel->getStatusMesinInventori().'", "'.$mesinInventoriModel->getTanggalMasukMesinInventori().'")');
 
@@ -61,7 +62,7 @@ class MesinInventoriController{
     {
         $result = new Result();
 
-        if($this->checkIfDataExist($mesinInventoriModel)){
+        if(!$this->checkIfDataExist($mesinInventoriModel)){
 
             $update = $this->connection->query('UPDATE '.$this->tbMesinInventori.' SET nomor_mesin_inventori="'.$mesinInventoriModel->getNomorMesinInventori().'", id_jenis_mesin="'.$mesinInventoriModel->getIdJenisMesin().'", lokasi_mesin_inventori ="'.$mesinInventoriModel->getLokasiMesinInventori().'", status_mesin_inventori ="'.$mesinInventoriModel->getStatusMesinInventori().'", tanggal_masuk_mesin_inventori="'.$mesinInventoriModel->getTanggalMasukMesinInventori().'" WHERE id_mesin_inventori = '.$mesinInventoriModel->getIdMesinInventori());
 
@@ -83,21 +84,45 @@ class MesinInventoriController{
 
     public function delete(MesinInventoriModel $mesinInventoriModel)
     {
+        $result = new Result();
 
+        if($this->checkIfDataExist($mesinInventoriModel)){
+            
+            $delete = $this->connection->query('DELETE FROM '.$this->tbMesinInventori.' WHERE id_mesin_inventori="'.$mesinInventoriModel->getIdMesinInventori().'" AND nomor_mesin_inventori="'.$mesinInventoriModel->getNomorMesinInventori().'" ');
+
+            if(!$delete){
+                die("Query gagal : ".$this->connection->error);
+            }else{
+
+                $result->setIsSuccess(true);
+                $result->setMessage($this->successDelete);
+            }
+        }else{
+            $result->setIsSuccess(false);
+            $result->setMessage($this->errorNotUnique);
+        }
+
+        return $result;
     }
 
     public function checkIfDataExist(MesinInventoriModel $mesinInventoriModel){
         if($mesinInventoriModel->getIdMesinInventori()==null){
+            //berarti insert
             $checkExist = $this->connection->query('SELECT * from '.$this->tbMesinInventori.' WHERE nomor_mesin_inventori = "'.$mesinInventoriModel->getNomorMesinInventori().'" ');
+        }else if($mesinInventoriModel->getLokasiMesinInventori()==null){
+            //berarti delete
+            $checkExist = $this->connection->query('SELECT * from '.$this->tbMesinInventori.' WHERE nomor_mesin_inventori = "'.$mesinInventoriModel->getNomorMesinInventori().'" AND id_mesin_inventori = '.$mesinInventoriModel->getIdMesinInventori().'');
         }else{
+            //berarti update
             $checkExist = $this->connection->query('SELECT * from '.$this->tbMesinInventori.' WHERE nomor_mesin_inventori = "'.$mesinInventoriModel->getNomorMesinInventori().'" AND id_mesin_inventori != '.$mesinInventoriModel->getIdMesinInventori().'');
         }
-        if($checkExist->num_rows<=0){
+        if($checkExist->num_rows>0){
             return true;
         }else{
             return false;
         }
     }
+
 }
 
 ?>

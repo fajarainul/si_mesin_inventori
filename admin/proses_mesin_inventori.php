@@ -48,7 +48,8 @@ switch ($aksi){
         break;
 
     case 'delete':
-        $mesinInventoriModel->setIdJenisMesin($_GET['id']);
+        $mesinInventoriModel->setIdMesinInventori($_GET['id_mesin']);
+        $mesinInventoriModel->setNomorMesinInventori($_GET['no_mesin']);
 
         $result = $mesinInventoriController->delete($mesinInventoriModel);
 
