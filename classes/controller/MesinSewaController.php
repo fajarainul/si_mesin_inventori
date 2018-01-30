@@ -24,8 +24,15 @@ class MesinSewaController{
         $result = new Result();
 
         if(!$this->checkIfDataExist($mesinSewaModel)){
-            $insert = $this->connection->query('INSERT into '.$this->tbMesinSewa.'(nomor_mesin_sewa, id_jenis_mesin, lokasi_mesin_sewa, status_mesin_sewa, tanggal_masuk_mesin_sewa, tanggal_keluar_mesin_sewa) 
+
+            if($mesinSewaModel->getTanggalKeluarMesinSewa()!=null){
+                $insert = $this->connection->query('INSERT into '.$this->tbMesinSewa.'(nomor_mesin_sewa, id_jenis_mesin, lokasi_mesin_sewa, status_mesin_sewa, tanggal_masuk_mesin_sewa, tanggal_keluar_mesin_sewa) 
                         VALUES("'.$mesinSewaModel->getNomorMesinSewa().'", "'.$mesinSewaModel->getIdJenisMesin().'","'.$mesinSewaModel->getLokasiMesinSewa().'", "'.$mesinSewaModel->getStatusMesinSewa().'", "'.$mesinSewaModel->getTanggalMasukMesinSewa().'" , "'.$mesinSewaModel->getTanggalKeluarMesinSewa().'")');
+            }else{
+                $insert = $this->connection->query('INSERT into '.$this->tbMesinSewa.'(nomor_mesin_sewa, id_jenis_mesin, lokasi_mesin_sewa, status_mesin_sewa, tanggal_masuk_mesin_sewa) 
+                        VALUES("'.$mesinSewaModel->getNomorMesinSewa().'", "'.$mesinSewaModel->getIdJenisMesin().'","'.$mesinSewaModel->getLokasiMesinSewa().'", "'.$mesinSewaModel->getStatusMesinSewa().'", "'.$mesinSewaModel->getTanggalMasukMesinSewa().'" )');
+
+            }
 
             if(!$insert){
                 die("Query gagal : ".$this->connection->error);
@@ -47,7 +54,7 @@ class MesinSewaController{
     {
         $listData = $this->connection->query('SELECT * FROM '.$this->tbMesinSewa.' 
                                                     INNER JOIN '.$this->tbJenisMesin.' 
-                                                    ON tb_mesin_inventori.id_jenis_mesin = tb_jenis_mesin.id_jenis_mesin');
+                                                    ON tb_mesin_sewa.id_jenis_mesin = tb_jenis_mesin.id_jenis_mesin');
 
         if(!$listData){
             die("Query gagal : ".$this->connection->error);
@@ -64,7 +71,7 @@ class MesinSewaController{
 
         if(!$this->checkIfDataExist($mesinSewaModel)){
 
-            $update = $this->connection->query('UPDATE '.$this->tbMesinSewa.' SET nomor_mesin_inventori="'.$mesinSewaModel->getNomorMesinInventori().'", id_jenis_mesin="'.$mesinSewaModel->getIdJenisMesin().'", lokasi_mesin_inventori ="'.$mesinSewaModel->getLokasiMesinInventori().'", status_mesin_inventori ="'.$mesinSewaModel->getStatusMesinInventori().'", tanggal_masuk_mesin_inventori="'.$mesinSewaModel->getTanggalMasukMesinInventori().'" WHERE id_mesin_inventori = '.$mesinSewaModel->getIdMesinInventori());
+            $update = $this->connection->query('UPDATE '.$this->tbMesinSewa.' SET nomor_mesin_inventori="'.$mesinSewaModel->getNomorMesinSewa().'", id_jenis_mesin="'.$mesinSewaModel->getIdJenisMesin().'", lokasi_mesin_inventori ="'.$mesinSewaModel->getLokasiMesinSewa().'", status_mesin_inventori ="'.$mesinSewaModel->getStatusMesinSewa().'", tanggal_masuk_mesin_inventori="'.$mesinSewaModel->getTanggalMasukMesinSewa().'" WHERE id_mesin_inventori = '.$mesinSewaModel->getIdMesinSewa());
 
             if(!$update){
                 die("Query gagal : ".$this->connection->error);
@@ -88,7 +95,7 @@ class MesinSewaController{
 
         if($this->checkIfDataExist($mesinSewaModel)){
 
-            $delete = $this->connection->query('DELETE FROM '.$this->tbMesinSewa.' WHERE id_mesin_inventori="'.$mesinSewaModel->getIdMesinInventori().'" AND nomor_mesin_inventori="'.$mesinSewaModel->getNomorMesinInventori().'" ');
+            $delete = $this->connection->query('DELETE FROM '.$this->tbMesinSewa.' WHERE id_mesin_sewa="'.$mesinSewaModel->getIdMesinSewa().'" AND nomor_mesin_sewa="'.$mesinSewaModel->getNomorMesinSewa().'" ');
 
             if(!$delete){
                 die("Query gagal : ".$this->connection->error);
@@ -109,12 +116,12 @@ class MesinSewaController{
         if($mesinSewaModel->getIdMesinSewa()==null){
             //berarti insert
             $checkExist = $this->connection->query('SELECT * from '.$this->tbMesinSewa.' WHERE nomor_mesin_sewa = "'.$mesinSewaModel->getNomorMesinSewa().'" ');
-        }else if($mesinSewaModel->getLokasiMesinInventori()==null){
+        }else if($mesinSewaModel->getLokasiMesinSewa()==null){
             //berarti delete
-            $checkExist = $this->connection->query('SELECT * from '.$this->tbMesinSewa.' WHERE nomor_mesin_inventori = "'.$mesinSewaModel->getNomorMesinInventori().'" AND id_mesin_inventori = '.$mesinSewaModel->getIdMesinInventori().'');
+            $checkExist = $this->connection->query('SELECT * from '.$this->tbMesinSewa.' WHERE nomor_mesin_sewa = "'.$mesinSewaModel->getNomorMesinSewa().'" AND id_mesin_sewa = '.$mesinSewaModel->getIdMesinSewa().'');
         }else{
             //berarti update
-            $checkExist = $this->connection->query('SELECT * from '.$this->tbMesinSewa.' WHERE nomor_mesin_inventori = "'.$mesinSewaModel->getNomorMesinInventori().'" AND id_mesin_inventori != '.$mesinSewaModel->getIdMesinInventori().'');
+            $checkExist = $this->connection->query('SELECT * from '.$this->tbMesinSewa.' WHERE nomor_mesin_sewa = "'.$mesinSewaModel->getNomorMesinSewa().'" AND id_mesin_sewa != '.$mesinSewaModel->getIdMesinSewa().'');
         }
         if($checkExist->num_rows>0){
             return true;

@@ -19,7 +19,14 @@ switch ($aksi){
         $tglKeluar = $_POST['tanggalKeluarMesinSewa'];
 
         $tglMasuk = date("Y-m-d", strtotime($tglMasuk) );
-        $tglKeluar = date("Y-m-d", strtotime($tglKeluar) );
+
+        if($tglKeluar!=null && $tglKeluar!=""){
+            $tglKeluar = date("Y-m-d", strtotime($tglKeluar) );
+        }else{
+            $tglKeluar = NULL;
+        }
+
+        //die($tglKeluar);
 
         $mesinSewaModel->setNomorMesinSewa($_POST['nomorMesinSewa']);
         $mesinSewaModel->setIdJenisMesin($_POST['jenisMesinSewa']);
@@ -51,8 +58,8 @@ switch ($aksi){
         break;
 
     case 'delete':
-        $mesinSewaModel->setIdMesinInventori($_GET['id_mesin']);
-        $mesinSewaModel->setNomorMesinInventori($_GET['no_mesin']);
+        $mesinSewaModel->setIdMesinSewa($_GET['id_mesin']);
+        $mesinSewaModel->setNomorMesinSewa($_GET['no_mesin']);
 
         $result = $mesinSewaController->delete($mesinSewaModel);
 
