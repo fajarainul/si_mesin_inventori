@@ -11,4 +11,5 @@ ALTER TABLE `tb_mesin_inventori` ADD `jenis_mesin_inventori` INT NOT NULL AFTER 
 //EDIT NAMA KOLOM TABLE MESIN INVENTORI
 ALTER TABLE `tb_mesin_inventori` CHANGE `jenis_mesin_inventori` `id_jenis_mesin` INT(4) NOT NULL;
 
-
+//BUAT TABEL MESIN SEWA
+CREATE TABLE `si_mesin_inventori`.`tb_mesin_sewa` ( `id_mesin_sewa` INT NOT NULL AUTO_INCREMENT , `nomor_mesin_sewa` VARCHAR(32) NOT NULL , `id_jenis_mesin` INT(4) NOT NULL , `lokasi_mesin_sewa` VARCHAR(8) NOT NULL , `status_mesin_sewa` VARCHAR(8) NOT NULL , `tanggal_masuk_mesin_sewa` DATETIME NOT NULL , `tanggal_keluar_mesin_sewa` DATETIME NULL , PRIMARY KEY (`id_mesin_sewa`)) ENGINE = InnoDB;

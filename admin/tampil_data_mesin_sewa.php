@@ -36,13 +36,32 @@ include '_header.php';
                   <h4><i class="fa fa-angle-right"></i> Tabel Mesin Sewa</h4>
                   <hr>
 
+                    <?php
+
+                    if (isset($_SESSION['success'])) {
+
+                        if ($_SESSION['success']) {
+
+                            echo '<div class="alert alert-success">' . $_SESSION['message'] . '</div>';
+
+                        } else {
+                            echo '<div class="alert alert-danger">' . $_SESSION['message'] . '</div>';
+                        }
+
+                        unset($_SESSION['success']);
+                        unset($_SESSION['message']);
+
+                    }
+
+                    ?>
+
                   <div>
-                    <a href="tambah_data_mesin_sewa.php" class="btn btn-primary" style="float: right;">Tambah Mesin Sewa</a>
+                    <a href="tambah_data_mesin_sewa.php" class="btn btn-primary" style="float: right;margin-bottom:20px">Tambah Mesin Sewa</a>
                   </div>
                   <div class="clearfix"></div>
                   <!-- DIV TABLE -->
                   <div>
-                    <table class="table">
+                    <table class="table" id="tableMesinInventori">
                         <thead>
                         <tr>
                             <th>No</th>
@@ -118,6 +137,13 @@ include '_footer.php';
 include '_js.php';
 ?>
 
+<script>
+
+    $(document).ready(function() {
+        $('#tableMesinInventori').DataTable();
+    } );
+
+</script>
 <script>
 
     function konfirmasiHapus() {

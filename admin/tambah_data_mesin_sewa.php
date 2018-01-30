@@ -37,17 +37,31 @@ include '_header.php';
                   <hr>
                   <!-- DIV FORMS -->
                   <div class="text-right">
-                    <form>
+                    <form action="proses_mesin_sewa.php?aksi=insert" method="post">
                       <div class="form-group row">
 
                         <label for="nomorMesin" class="col-sm-2 col-form-label">Nomor Mesin Sewa</label>
                         <div class="col-sm-4">
-                          <input type="text" class="form-control" id="nomorMesin" placeholder="Nomor Mesin Sewa" name="nomorMesin">
+                          <input type="text" class="form-control" id="nomorMesin" placeholder="Nomor Mesin Sewa" name="nomorMesinSewa">
                         </div>
 
                         <label for="jenisMesin" class="col-sm-2 col-form-label">Jenis Mesin</label>
                         <div class="col-sm-4">
-                          <input type="text" class="form-control" id="jenisMesin" placeholder="Jenis Mesin" name="jenisMesin">
+                            <select class="form-control" id="jenisMesin" name="jenisMesinSewa"
+                                    required="required">
+
+                                <?php
+
+                                $jenisMesinController = new JenisMesinController();
+                                $listData = $jenisMesinController->retrieve();
+
+                                while ($data = $listData->fetch_object(JenisMesinModel::class)) {
+                                    echo "<option value=" . $data->getIdJenisMesin() . ">" . $data->getNamaJenisMesin() . "</option>";
+                                }
+
+                                ?>
+
+                            </select>
                         </div>
 
                       </div>
@@ -56,12 +70,16 @@ include '_header.php';
 
                         <label for="lokasiMesin" class="col-sm-2 col-form-label">Lokasi Mesin Sewa</label>
                         <div class="col-sm-4">
-                          <input type="text" class="form-control" id="lokasiMesin" placeholder="Lokasi Mesin Sewa" name="lokasiMesin">
+                          <input type="text" class="form-control" id="lokasiMesin" placeholder="Lokasi Mesin Sewa" name="lokasiMesinSewa">
                         </div>
 
                         <label for="statusMesin" class="col-sm-2 col-form-label">Status Mesin</label>
                         <div class="col-sm-4">
-                          <input type="text" class="form-control" id="statusMesin" placeholder="Status Mesin" name="statusMesin">
+                            <select class="form-control" id="statusMesin" name="statusMesinSewa" required="required">
+                                <option value="1">Baik</option>
+                                <option value="2">Perlu Perbaikan</option>
+                                <option value="5">Rusak Total</option>
+                            </select>
                         </div>
 
                       </div>
@@ -70,12 +88,12 @@ include '_header.php';
 
                         <label for="tglMasuk" class="col-sm-2 col-form-label">Tanggal Masuk</label>
                         <div class="col-sm-4">
-                          <input type="text" class="form-control" id="tglMasuk" placeholder="Tanggal Masuk" name="tglMasuk">
+                          <input type="text" class="form-control datepicker" id="tglMasuk" placeholder="Tanggal Masuk" name="tanggalMasukMesinSewa">
                         </div>
 
                         <label for="tglKeluar" class="col-sm-2 col-form-label">Tanggal Keluar</label>
                         <div class="col-sm-4">
-                          <input type="text" class="form-control" id="tglKeluar" placeholder="Tanggal Keluar" name="tglKeluar">
+                          <input type="text" class="form-control" id="tglKeluar" placeholder="Tanggal Keluar" name="tanggalKeluarMesinSewa">
                         </div>
 
                       </div>
@@ -106,6 +124,38 @@ include '_footer.php';
 <?php
 include '_js.php';
 ?>
+
+<script>
+
+    $(document).ready(function () {
+        /*$('.datepicker').datepicker({
+            format: "dd MM yyyy"
+        });*/
+
+        var startDate;
+
+        $('#tglMasuk').datepicker({
+            format: "dd MM yyyy",
+            autoclose : true
+        }).on('changeDate', function(e) {
+            startDate = e.date;
+
+            $('#tglKeluar').val("");
+            $('#tglKeluar').datepicker({
+                format: "dd MM yyyy",
+                autoclose : true,
+                startDate: startDate
+            });
+
+        });
+
+
+
+
+
+    });
+
+</script>
 
 
 </body>

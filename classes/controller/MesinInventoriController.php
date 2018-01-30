@@ -87,7 +87,7 @@ class MesinInventoriController{
         $result = new Result();
 
         if($this->checkIfDataExist($mesinInventoriModel)){
-            
+
             $delete = $this->connection->query('DELETE FROM '.$this->tbMesinInventori.' WHERE id_mesin_inventori="'.$mesinInventoriModel->getIdMesinInventori().'" AND nomor_mesin_inventori="'.$mesinInventoriModel->getNomorMesinInventori().'" ');
 
             if(!$delete){

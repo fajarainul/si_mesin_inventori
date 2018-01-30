@@ -64,7 +64,7 @@ include '_header.php';
                         <div class="clearfix"></div>
                         <!-- DIV TABLE -->
                         <div>
-                            <table class="table">
+                            <table class="table" id="tableMesinInventori">
                                 <thead>
                                 <tr>
                                     <th>No</th>
@@ -152,6 +152,14 @@ include '_footer.php';
 <?php
 include '_js.php';
 ?>
+
+<script>
+
+    $(document).ready(function() {
+        $('#tableMesinInventori').DataTable();
+    } );
+
+</script>
 
 <script>
 
