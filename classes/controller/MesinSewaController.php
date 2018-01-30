@@ -71,7 +71,12 @@ class MesinSewaController{
 
         if(!$this->checkIfDataExist($mesinSewaModel)){
 
-            $update = $this->connection->query('UPDATE '.$this->tbMesinSewa.' SET nomor_mesin_inventori="'.$mesinSewaModel->getNomorMesinSewa().'", id_jenis_mesin="'.$mesinSewaModel->getIdJenisMesin().'", lokasi_mesin_inventori ="'.$mesinSewaModel->getLokasiMesinSewa().'", status_mesin_inventori ="'.$mesinSewaModel->getStatusMesinSewa().'", tanggal_masuk_mesin_inventori="'.$mesinSewaModel->getTanggalMasukMesinSewa().'" WHERE id_mesin_inventori = '.$mesinSewaModel->getIdMesinSewa());
+            if($mesinSewaModel->getTanggalKeluarMesinSewa()!=null){
+                $update = $this->connection->query('UPDATE '.$this->tbMesinSewa.' SET nomor_mesin_sewa="'.$mesinSewaModel->getNomorMesinSewa().'", id_jenis_mesin="'.$mesinSewaModel->getIdJenisMesin().'", lokasi_mesin_sewa ="'.$mesinSewaModel->getLokasiMesinSewa().'", status_mesin_sewa ="'.$mesinSewaModel->getStatusMesinSewa().'", tanggal_masuk_mesin_sewa="'.$mesinSewaModel->getTanggalMasukMesinSewa().'", tanggal_keluar_mesin_sewa="'.$mesinSewaModel->getTanggalKeluarMesinSewa().'" WHERE id_mesin_sewa = '.$mesinSewaModel->getIdMesinSewa());
+            }else{
+                $update = $this->connection->query('UPDATE '.$this->tbMesinSewa.' SET nomor_mesin_sewa="'.$mesinSewaModel->getNomorMesinSewa().'", id_jenis_mesin="'.$mesinSewaModel->getIdJenisMesin().'", lokasi_mesin_sewa ="'.$mesinSewaModel->getLokasiMesinSewa().'", status_mesin_sewa ="'.$mesinSewaModel->getStatusMesinSewa().'", tanggal_masuk_mesin_sewa="'.$mesinSewaModel->getTanggalMasukMesinSewa().'" WHERE id_mesin_sewa = '.$mesinSewaModel->getIdMesinSewa());
+            }
+
 
             if(!$update){
                 die("Query gagal : ".$this->connection->error);

@@ -43,13 +43,13 @@ include '_header.php';
                       <div class="form-group row">
                         <label for="jenisMesin" class="col-sm-4 col-form-label">Nama Jenis Mesin</label>
                         <div class="col-sm-8">
-                          <input type="text" class="form-control" id="namaMesin" name="namaMesin" placeholder="Nama Jenis Mesin" value="<?php echo $namaJenisMesin?>" >
+                          <input type="text" class="form-control" id="namaMesin" name="namaMesin" placeholder="Nama Jenis Mesin" value="<?php echo $namaJenisMesin?>" required="required">
                         </div>
                       </div>
                       <div class="form-group row">
                         <label for="kodeMesin" class="col-sm-4 col-form-label">Kode Mesin</label>
                         <div class="col-sm-8">
-                          <input type="text" class="form-control" id="kodeMesin" name="kodeMesin" placeholder="Kode Mesin" value="<?php echo $kodeJenisMesin?>">
+                          <input type="text" class="form-control" id="kodeMesin" name="kodeMesin" placeholder="Kode Mesin" value="<?php echo $kodeJenisMesin?>" required="required">
                         </div>
                       </div>
                       <div class="form-group row">

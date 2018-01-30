@@ -80,7 +80,7 @@ include '_header.php';
                                     $listData = $jenisMesinController->retrieve();
 
                                     if($listData->num_rows<=0){
-                                        echo "<tr><td colspan='4'></td>Data Jenis Mesin Kosong</tr>";
+                                        echo "<tr><td colspan='4'>Data Jenis Mesin Kosong</td></tr>";
                                     }else{
                                         $no = 1;
                                         while ($data = $listData->fetch_object(JenisMesinModel::class)){

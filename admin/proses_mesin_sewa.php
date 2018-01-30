@@ -41,17 +41,28 @@ switch ($aksi){
 
     case 'edit':
 
-        $tglMasuk = $_POST['tanggalMasukMesinInventori'];
+        $tglMasuk = $_POST['tanggalMasukMesinSewa'];
+        $tglKeluar = $_POST['tanggalKeluarMesinSewa'];
 
         $tglMasuk = date("Y-m-d", strtotime($tglMasuk) );
 
-        $mesinSewaModel->setNomorMesinInventori($_POST['nomorMesinInventori']);
-        $mesinSewaModel->setIdJenisMesin($_POST['jenisMesinInventori']);
-        $mesinSewaModel->setLokasiMesinInventori($_POST['lokasiMesinInventori']);
-        $mesinSewaModel->setStatusMesinInventori($_POST['statusMesinInventori']);
-        $mesinSewaModel->setTanggalMasukMesinInventori($tglMasuk);
-        $mesinSewaModel->setIdMesinInventori($_GET['id']);
+        if($tglKeluar!=null && $tglKeluar!=""){
+            $tglKeluar = date("Y-m-d", strtotime($tglKeluar) );
+        }else{
+            $tglKeluar = NULL;
+        }
 
+        $tglMasuk = date("Y-m-d", strtotime($tglMasuk) );
+
+        $mesinSewaModel->setNomorMesinSewa($_POST['nomorMesinSewa']);
+        $mesinSewaModel->setIdJenisMesin($_POST['jenisMesinSewa']);
+        $mesinSewaModel->setLokasiMesinSewa($_POST['lokasiMesinSewa']);
+        $mesinSewaModel->setStatusMesinSewa($_POST['statusMesinSewa']);
+        $mesinSewaModel->setTanggalMasukMesinSewa($tglMasuk);
+        $mesinSewaModel->setTanggalKeluarMesinSewa($tglKeluar);
+        $mesinSewaModel->setIdMesinSewa($_GET['id']);
+
+        //print_r($mesinSewaModel);die();
 
         $result = $mesinSewaController->update($mesinSewaModel);
 

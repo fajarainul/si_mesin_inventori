@@ -82,7 +82,7 @@ include '_header.php';
                                 $listData = $mesinSewaController->retrieve();
 
                                 if ($listData->num_rows <= 0) {
-                                    echo "<tr><td colspan='8'></td>Data Mesin Sewa Kosong</tr>";
+                                    echo "<tr><td colspan='8'>Data Mesin Sewa Kosong</td></tr>";
                                 } else {
                                     $no = 1;
                                     while ($data = $listData->fetch_object(MesinSewaModel::class)) {
@@ -125,7 +125,7 @@ include '_header.php';
                                         echo "<td>" . $tglKeluar . "</td>";
 
                                         echo "<td>
-                                                        <a href=\"ubah_data_mesin_inventori.php?no_mesin=".$data->getNomorMesinSewa()."&id_jenis_mesin=".$data->getIdJenisMesin()."&lokasi_mesin=".$data->getLokasiMesinSewa()."&id_mesin=".$data->getIdMesinSewa()."&tgl_masuk=".$data->getTanggalMasukMesinSewa()."&status_mesin=".$data->getStatusMesinSewa()."\" class=\"btn btn-primary btn-xs\"><i
+                                                        <a href=\"ubah_data_mesin_sewa.php?no_mesin=".$data->getNomorMesinSewa()."&id_jenis_mesin=".$data->getIdJenisMesin()."&lokasi_mesin=".$data->getLokasiMesinSewa()."&id_mesin=".$data->getIdMesinSewa()."&tgl_masuk=".$data->getTanggalMasukMesinSewa()."&tgl_keluar=".$data->getTanggalKeluarMesinSewa()."&status_mesin=".$data->getStatusMesinSewa()."\" class=\"btn btn-primary btn-xs\"><i
                                                         class=\"fa fa-pencil\"></i></a>
                                                         <a href=\"proses_mesin_sewa.php?aksi=delete&no_mesin=".$data->getNomorMesinSewa()."&id_mesin=".$data->getIdMesinSewa()."\" class=\"btn btn-danger btn-xs\" onclick=\"return konfirmasiHapus()\"><i class=\"fa fa-trash-o \"></i></a>
                                               </td>";

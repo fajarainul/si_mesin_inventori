@@ -5,7 +5,7 @@ require_once '../classes/controller/JenisMesinController.php';
 require_once '../classes/model/JenisMesinModel.php';
 
 $idMesinInventori = $_GET['id_mesin'];
-$noMesinIventori = $_GET['no_mesin'];
+$noMesinInventori = $_GET['no_mesin'];
 $idJenisMesin = $_GET['id_jenis_mesin'];
 $lokasiMesin = $_GET['lokasi_mesin'];
 $tanggalMasuk = $_GET['tgl_masuk'];
@@ -51,7 +51,7 @@ include '_header.php';
                                         Inventori</label>
                                     <div class="col-sm-4">
                                         <input type="text" class="form-control" id="nomorMesin"
-                                               placeholder="Nomor Mesin Inventori" name="nomorMesinInventori" value="<?php echo $noMesinIventori;?>" >
+                                               placeholder="Nomor Mesin Inventori" name="nomorMesinInventori" value="<?php echo $noMesinInventori;?>" required="required">
                                     </div>
 
                                     <label for="jenisMesin" class="col-sm-2 col-form-label">Jenis Mesin</label>
@@ -89,7 +89,7 @@ include '_header.php';
                                         Inventori</label>
                                     <div class="col-sm-4">
                                         <input type="text" class="form-control" id="lokasiMesin"
-                                               placeholder="Lokasi Mesin Inventori" name="lokasiMesinInventori" value="<?php echo $lokasiMesin?>">
+                                               placeholder="Lokasi Mesin Inventori" name="lokasiMesinInventori" value="<?php echo $lokasiMesin?>" required="required">
                                     </div>
 
                                     <label for="statusMesin" class="col-sm-2 col-form-label">Status Mesin</label>
@@ -121,7 +121,7 @@ include '_header.php';
                                             $tanggalMasuk = date("d F Y", strtotime($tanggalMasuk) );
                                         ?>
                                         <input type="text" class="form-control datepicker" id="tglMasuk"
-                                               placeholder="Tanggal Masuk" name="tanggalMasukMesinInventori" value="<?php echo $tanggalMasuk?>">
+                                               placeholder="Tanggal Masuk" name="tanggalMasukMesinInventori" value="<?php echo $tanggalMasuk?>" required="required">
                                     </div>
 
                                 </div>

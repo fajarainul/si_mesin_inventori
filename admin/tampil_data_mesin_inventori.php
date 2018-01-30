@@ -83,7 +83,7 @@ include '_header.php';
                                 $listData = $mesinInventoriController->retrieve();
 
                                 if ($listData->num_rows <= 0) {
-                                    echo "<tr><td colspan='7'></td>Data Mesin Inventori Kosong</tr>";
+                                    echo "<tr><td colspan='7'>Data Mesin Inventori Kosong</td></tr>";
                                 } else {
                                     $no = 1;
                                     while ($data = $listData->fetch_object(MesinInventoriModel::class)) {
