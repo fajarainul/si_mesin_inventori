@@ -13,3 +13,7 @@ ALTER TABLE `tb_mesin_inventori` CHANGE `jenis_mesin_inventori` `id_jenis_mesin`
 
 //BUAT TABEL MESIN SEWA
 CREATE TABLE `si_mesin_inventori`.`tb_mesin_sewa` ( `id_mesin_sewa` INT NOT NULL AUTO_INCREMENT , `nomor_mesin_sewa` VARCHAR(32) NOT NULL , `id_jenis_mesin` INT(4) NOT NULL , `lokasi_mesin_sewa` VARCHAR(8) NOT NULL , `status_mesin_sewa` VARCHAR(8) NOT NULL , `tanggal_masuk_mesin_sewa` DATETIME NOT NULL , `tanggal_keluar_mesin_sewa` DATETIME NULL , PRIMARY KEY (`id_mesin_sewa`)) ENGINE = InnoDB;
+
+
+//ALTER TABLE MESIN SEWA
+ALTER TABLE `tb_mesin_sewa` CHANGE `status_mesin_sewa` `status_mesin_sewa` VARCHAR(8) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL COMMENT 'status = 1 jika kondisi baik, status = 2 jika mesin perlu pebaikan, status = 3 jika mesin sedang diperbaiki, status = 4 jika mesin selesai diperbaiki, status = 5 jika mesin rusak total ';

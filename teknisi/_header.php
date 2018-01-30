@@ -2,7 +2,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>SI Data Inventori Mesin - Admin</title>
+    <title>SI Data Inventori Mesin - Teknisi</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../assets/css/bootstrap.css" rel="stylesheet">

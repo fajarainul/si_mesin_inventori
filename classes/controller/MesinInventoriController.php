@@ -58,6 +58,21 @@ class MesinInventoriController{
         }
     }
 
+    public function retrieveTeknisi()
+    {
+        $listData = $this->connection->query('SELECT * FROM '.$this->tbMesinInventori.' 
+                                                    INNER JOIN '.$this->tbJenisMesin.' 
+                                                    ON tb_mesin_inventori.id_jenis_mesin = tb_jenis_mesin.id_jenis_mesin WHERE tb_mesin_inventori.status_mesin_inventori!=1');
+
+        if(!$listData){
+            die("Query gagal : ".$this->connection->error);
+        }else{
+
+            return $listData;
+
+        }
+    }
+
     public function update(MesinInventoriModel $mesinInventoriModel)
     {
         $result = new Result();

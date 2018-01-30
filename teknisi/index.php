@@ -30,8 +30,7 @@ include '_header.php';
                         <div class="text-center">
                             <h2 class>Selamat Datang....</h2>
                             <p style="font-size:20px">Di Sistem Informasi Data Inventori PT Fast Manufacturing</p>
-                            <p style="font-size:16px"><b>Anda Login sebagai ADMIN LOGISTIK</b></p>
-
+                            <p style="font-size:16px"><b>Anda Login sebagai TEKNISI</b></p>
                         </div>
                     </div
                 </div>
@@ -42,41 +41,13 @@ include '_header.php';
     </section><!-- /MAIN CONTENT -->
 
     <!--main content end-->
-    <!--footer start-->
-    <footer class="site-footer">
-        <div class="text-center">
-            2018 - Mega Yunita Sari
-            <a href="#" class="go-top">
-                <i class="fa fa-angle-up"></i>
-            </a>
-        </div>
-    </footer>
-    <!--footer end-->
 </section>
+<?php
+include '_footer.php';
+?>
 
-<!-- js placed at the end of the document so the pages load faster -->
-<script src="../assets/js/jquery.js"></script>
-<script src="../assets/js/bootstrap.min.js"></script>
-<script src="../assets/js/jquery-ui-1.9.2.custom.min.js"></script>
-<script src="../assets/js/jquery.ui.touch-punch.min.js"></script>
-<script class="include" type="text/javascript" src="../assets/js/jquery.dcjqaccordion.2.7.js"></script>
-<script src="../assets/js/jquery.scrollTo.min.js"></script>
-<script src="../assets/js/jquery.nicescroll.js" type="text/javascript"></script>
-
-
-<!--common script for all pages-->
-<script src="../assets/js/common-scripts.js"></script>
-
-<!--script for this page-->
-
-<script>
-    //custom select box
-
-    $(function () {
-        $('select.styled').customSelect();
-    });
-
-</script>
+<?php
+include '_js.php';
+?>
 
 </body>
-</html>

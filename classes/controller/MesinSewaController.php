@@ -65,6 +65,21 @@ class MesinSewaController{
         }
     }
 
+    public function retrieveTeknisi()
+    {
+        $listData = $this->connection->query('SELECT * FROM '.$this->tbMesinSewa.' 
+                                                    INNER JOIN '.$this->tbJenisMesin.' 
+                                                    ON tb_mesin_sewa.id_jenis_mesin = tb_jenis_mesin.id_jenis_mesin WHERE tb_mesin_sewa.status_mesin_sewa != 1');
+
+        if(!$listData){
+            die("Query gagal : ".$this->connection->error);
+        }else{
+
+            return $listData;
+
+        }
+    }
+
     public function update(MesinSewaModel $mesinSewaModel)
     {
         $result = new Result();
