@@ -115,7 +115,7 @@ include '_header.php';
                                         echo "<td>" . $tglMasuk . "</td>";
 
                                         echo "<td>
-                                                        <a href=\"ubah_data_mesin.php?id_mesin=".$data->getIdMesinInventori()."&status_mesin=".$data->getStatusMesinInventori()."&jenis_mesin=inventori\" class=\"btn btn-primary btn-xs\"><i
+                                                        <a href=\"ubah_data_mesin.php?no_mesin=".$data->getNomorMesinInventori()."&id_jenis_mesin=".$data->getIdJenisMesin()."&lokasi_mesin=".$data->getLokasiMesinInventori()."&id_mesin=".$data->getIdMesinInventori()."&tgl_masuk=".$data->getTanggalMasukMesinInventori()."&status_mesin=".$data->getStatusMesinInventori()."&tipe_mesin=inventori\" class=\"btn btn-primary btn-xs\"><i
                                                         class=\"fa fa-pencil\"></i></a>
                                                        
                                               </td>";
@@ -196,7 +196,7 @@ include '_header.php';
                                         echo "<td>" . $tglKeluar . "</td>";
 
                                         echo "<td>
-                                                        <a href=\"ubah_data_mesin_sewa.php?no_mesin=".$data->getNomorMesinSewa()."&id_jenis_mesin=".$data->getIdJenisMesin()."&lokasi_mesin=".$data->getLokasiMesinSewa()."&id_mesin=".$data->getIdMesinSewa()."&tgl_masuk=".$data->getTanggalMasukMesinSewa()."&tgl_keluar=".$data->getTanggalKeluarMesinSewa()."&status_mesin=".$data->getStatusMesinSewa()."\" class=\"btn btn-primary btn-xs\"><i
+                                                        <a href=\"ubah_data_mesin.php?no_mesin=".$data->getNomorMesinSewa()."&id_jenis_mesin=".$data->getIdJenisMesin()."&lokasi_mesin=".$data->getLokasiMesinSewa()."&id_mesin=".$data->getIdMesinSewa()."&tgl_masuk=".$data->getTanggalMasukMesinSewa()."&tgl_keluar=".$data->getTanggalKeluarMesinSewa()."&status_mesin=".$data->getStatusMesinSewa()."&tipe_mesin=sewa\" class=\"btn btn-primary btn-xs\"><i
                                                         class=\"fa fa-pencil\"></i></a>
                                                       
                                               </td>";

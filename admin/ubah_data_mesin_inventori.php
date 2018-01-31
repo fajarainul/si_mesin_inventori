@@ -97,14 +97,6 @@ include '_header.php';
                                         <select class="form-control" id="statusMesin" name="statusMesinInventori"
                                                 required="required">
 
-                                            <?php
-                                            if ($statusMesin == 1) {
-                                                $selected = 'selected';
-                                            }else{
-                                                $selected = '';
-                                            }
-                                            ?>
-
                                             <option value="1" <?php echo $statusMesin == 1 ? 'selected' : '' ?> >Baik</option>
                                             <option value="2" <?php echo $statusMesin == 2 ? 'selected' : '' ?> >Perlu Perbaikan</option>
                                             <option value="5" <?php echo $statusMesin == 5 ? 'selected' : '' ?> >Rusak Total</option>

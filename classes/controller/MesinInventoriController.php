@@ -97,6 +97,32 @@ class MesinInventoriController{
 
     }
 
+    public function updateTeknisi(MesinInventoriModel $mesinInventoriModel)
+    {
+        $result = new Result();
+
+        $checkIfExist = $this->connection->query('SELECT * from '.$this->tbMesinInventori.' WHERE id_mesin_inventori != '.$mesinInventoriModel->getIdMesinInventori().'');
+
+        if($checkIfExist->num_rows>0){
+            $update = $this->connection->query('UPDATE '.$this->tbMesinInventori.' SET  status_mesin_inventori ="'.$mesinInventoriModel->getStatusMesinInventori().'" WHERE id_mesin_inventori = '.$mesinInventoriModel->getIdMesinInventori());
+
+            if(!$update){
+                die("Query gagal : ".$this->connection->error);
+            }else{
+
+                $result->setIsSuccess(true);
+                $result->setMessage($this->successUpdate);
+            }
+        }else{
+            $result->setIsSuccess(false);
+            $result->setMessage($this->errorNotUnique);
+        }
+
+
+        return $result;
+
+    }
+
     public function delete(MesinInventoriModel $mesinInventoriModel)
     {
         $result = new Result();

@@ -4,9 +4,18 @@ session_start();
 require_once '../classes/controller/JenisMesinController.php';
 require_once '../classes/model/JenisMesinModel.php';
 
-$idMesinInventori = $_GET['id_mesin'];
-$jenisMesin = $_GET['jenis_mesin'];
+$idMesin = $_GET['id_mesin'];
+$tipeMesin = $_GET['tipe_mesin'];
 $statusMesin = $_GET['status_mesin'];
+$noMesin = $_GET['no_mesin'];
+$idJenisMesin = $_GET['id_jenis_mesin'];
+$lokasiMesin = $_GET['lokasi_mesin'];
+$tanggalMasuk = $_GET['tgl_masuk'];
+
+if($tipeMesin=="sewa"){
+    $tanggalKeluar = $_GET['tgl_keluar'];
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -41,20 +50,19 @@ include '_header.php';
                         <hr>
                         <!-- DIV FORMS -->
                         <div class="text-right">
-                            <form action="proses_data_mesin.php?aksi=edit&id=<?php echo $idMesinInventori?>&jenis_mesin=<?php echo $jenisMesin?>" method="post">
+                            <form action="proses_data_mesin.php?aksi=edit&id=<?php echo $idMesin?>&tipe_mesin=<?php echo $tipeMesin?>" method="post">
                                 <div class="form-group row">
 
-                                    <label for="nomorMesin" class="col-sm-2 col-form-label">Nomor Mesin
-                                        Inventori</label>
+                                    <label for="nomorMesin" class="col-sm-2 col-form-label">Nomor Mesin</label>
                                     <div class="col-sm-4">
                                         <input type="text" class="form-control" id="nomorMesin"
-                                               placeholder="Nomor Mesin Inventori" name="nomorMesinInventori" value="<?php echo $noMesinInventori;?>" required="required">
+                                               placeholder="Nomor Mesin" name="nomorMesin" value="<?php echo $noMesin;?>" required="required" disabled="disabled">
                                     </div>
 
                                     <label for="jenisMesin" class="col-sm-2 col-form-label">Jenis Mesin</label>
                                     <div class="col-sm-4">
-                                        <select class="form-control" id="jenisMesin" name="jenisMesinInventori"
-                                                required="required">
+                                        <select class="form-control" id="jenisMesin" name="jenisMesin"
+                                                required="required"disabled="disabled">
 
                                             <?php
 
@@ -82,28 +90,18 @@ include '_header.php';
 
                                 <div class="form-group row">
 
-                                    <label for="lokasiMesin" class="col-sm-2 col-form-label">Lokasi Mesin
-                                        Inventori</label>
+                                    <label for="lokasiMesin" class="col-sm-2 col-form-label">Lokasi Mesin</label>
                                     <div class="col-sm-4">
                                         <input type="text" class="form-control" id="lokasiMesin"
-                                               placeholder="Lokasi Mesin Inventori" name="lokasiMesinInventori" value="<?php echo $lokasiMesin?>" required="required">
+                                               placeholder="Lokasi Mesin" name="lokasiMesin" value="<?php echo $lokasiMesin?>" required="required" disabled="disabled">
                                     </div>
 
                                     <label for="statusMesin" class="col-sm-2 col-form-label">Status Mesin</label>
                                     <div class="col-sm-4">
-                                        <select class="form-control" id="statusMesin" name="statusMesinInventori"
+                                        <select class="form-control" id="statusMesin" name="statusMesin"
                                                 required="required">
-
-                                            <?php
-                                            if ($statusMesin == 1) {
-                                                $selected = 'selected';
-                                            }else{
-                                                $selected = '';
-                                            }
-                                            ?>
-
-                                            <option value="1" <?php echo $statusMesin == 1 ? 'selected' : '' ?> >Baik</option>
-                                            <option value="2" <?php echo $statusMesin == 2 ? 'selected' : '' ?> >Perlu Perbaikan</option>
+                                            <option value="3" <?php echo $statusMesin == 3 ? 'selected' : '' ?> >Sedang Diperbaiki</option>
+                                            <option value="4" <?php echo $statusMesin == 4 ? 'selected' : '' ?> >Selesai Diperbaiki</option>
                                             <option value="5" <?php echo $statusMesin == 5 ? 'selected' : '' ?> >Rusak Total</option>
                                         </select>
                                     </div>
@@ -118,8 +116,36 @@ include '_header.php';
                                             $tanggalMasuk = date("d F Y", strtotime($tanggalMasuk) );
                                         ?>
                                         <input type="text" class="form-control datepicker" id="tglMasuk"
-                                               placeholder="Tanggal Masuk" name="tanggalMasukMesinInventori" value="<?php echo $tanggalMasuk?>" required="required">
+                                               placeholder="Tanggal Masuk" name="tanggalMasukMesin" value="<?php echo $tanggalMasuk?>" required="required" disabled="disabled">
                                     </div>
+
+                                    <?php
+                                        if($tipeMesin=="sewa") {
+
+
+                                            ?>
+
+                                            <label for="tglKeluar" class="col-sm-2 col-form-label">Tanggal
+                                                Keluar</label>
+                                            <div class="col-sm-4">
+                                                <?php
+                                                if ($tanggalKeluar != "" && $tanggalKeluar != null) {
+                                                    $tanggalKeluar = date("d F Y", strtotime($tanggalKeluar));
+                                                } else {
+                                                    $tanggalKeluar = "";
+                                                }
+
+
+                                                ?>
+                                                <input type="text" class="form-control" id="tglKeluar"
+                                                       placeholder="Tanggal Keluar" name="tanggalKeluarMesin"
+                                                       value="<?php echo $tanggalKeluar ?>" disabled="disabled">
+                                            </div>
+
+
+                                            <?php
+                                            }
+                                        ?>
 
                                 </div>
 
@@ -152,15 +178,6 @@ include '_footer.php';
 include '_js.php';
 ?>
 
-<script>
-
-    $(document).ready(function () {
-        $('.datepicker').datepicker({
-            format: "dd MM yyyy"
-        });
-    });
-
-</script>
 
 
 </body>

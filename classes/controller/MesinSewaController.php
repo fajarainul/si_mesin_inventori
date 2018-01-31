@@ -109,6 +109,32 @@ class MesinSewaController{
 
     }
 
+    public function updateTeknisi(MesinSewaModel $mesinSewaModel)
+    {
+        $result = new Result();
+
+        $checkIfExist = $this->connection->query('SELECT * from '.$this->tbMesinSewa.' WHERE id_mesin_sewa != '.$mesinSewaModel->getIdMesinSewa().'');
+
+        if($checkIfExist->num_rows>0){
+            $update = $this->connection->query('UPDATE '.$this->tbMesinSewa.' SET  status_mesin_sewa ="'.$mesinSewaModel->getStatusMesinSewa().'" WHERE id_mesin_sewa = '.$mesinSewaModel->getIdMesinSewa());
+
+            if(!$update){
+                die("Query gagal : ".$this->connection->error);
+            }else{
+
+                $result->setIsSuccess(true);
+                $result->setMessage($this->successUpdate);
+            }
+        }else{
+            $result->setIsSuccess(false);
+            $result->setMessage($this->errorNotUnique);
+        }
+
+
+        return $result;
+
+    }
+
     public function delete(MesinSewaModel $mesinSewaModel)
     {
         $result = new Result();
