@@ -8,7 +8,9 @@ class MesinInventoriController{
     var $successInsert = "Tambah mesin inventori berhasil";
     var $successUpdate = "Ubah mesin inventori berhasil";
     var $successDelete = "Hapus mesin inventori berhasil";
+    var $failedDelete = "Hapus mesin inventori gagal";
     var $errorNotUnique = "Nomor mesin inventori harus unik";
+    var $failedChangeStatus = "Ubah status mesin gagal";
 
     var $tbMesinInventori = "tb_mesin_inventori";
     var $tbJenisMesin = "tb_jenis_mesin";
@@ -115,7 +117,7 @@ class MesinInventoriController{
             }
         }else{
             $result->setIsSuccess(false);
-            $result->setMessage($this->errorNotUnique);
+            $result->setMessage($this->failedChangeStatus);
         }
 
 
@@ -140,7 +142,7 @@ class MesinInventoriController{
             }
         }else{
             $result->setIsSuccess(false);
-            $result->setMessage($this->errorNotUnique);
+            $result->setMessage($this->failedDelete);
         }
 
         return $result;

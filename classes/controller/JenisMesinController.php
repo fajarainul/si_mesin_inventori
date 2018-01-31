@@ -7,6 +7,8 @@ class JenisMesinController{
     var $connection;
     var $successInsert = "Tambah data jenis mesin berhasil";
     var $successUpdate = "Ubah data jenis mesin berhasil";
+    var $successDelete = "Hapus data jenis mesin berhasil";
+    var $failedDelete = "Hapus data jenis mesin gagal, karena jenis mesin masih digunakan pada mesin inventori dan/atau mesin sewa";
     var $errorNotUnique = "Nama jenis mesin/kode mesin sudah tersimpan di database";
 
     var $tbName = "tb_jenis_mesin";
@@ -72,6 +74,46 @@ class JenisMesinController{
 
     public function delete(JenisMesinModel $jenisMesinModel)
     {
+        $result = new Result();
+
+        if($this->checkIfDataUsed($jenisMesinModel)){
+
+            $delete = $this->connection->query('DELETE FROM '.$this->tbName.' WHERE id_jenis_mesin="'.$jenisMesinModel->getIdJenisMesin().'" ');
+
+            if(!$delete){
+                die("Query gagal : ".$this->connection->error);
+            }else{
+
+                $result->setIsSuccess(true);
+                $result->setMessage($this->successDelete);
+            }
+        }else{
+            $result->setIsSuccess(false);
+            $result->setMessage($this->failedDelete);
+        }
+
+        return $result;
+    }
+
+
+    //fungsi untuk cek apakah data jenis mesin yang akan dihapus
+    //digunakan pada tabel mesin inventori / mesin sewa
+    //jika data jenis mesin terdapat pada salah satu tabel tersebut
+    //maka proses gagal
+    //jika tidak digunakan pada keduanya, maka proses hapus diteruskan
+    public function checkIfDataUsed(JenisMesinModel $jenisMesinModel){
+
+        //pertama check dulu di tabel inventori, apakah jenis mesin digunakan
+        $checkInInventori = $this->connection->query('SELECT * from tb_mesin_inventori WHERE id_jenis_mesin = "'.$jenisMesinModel->getIdJenisMesin().'"');
+        //jika tidak digunakan, check di tabel sea
+        if($checkInInventori->num_rows<=0){
+            $checkInSewa = $this->connection->query('SELECT * from tb_mesin_sewa WHERE id_jenis_mesin = "'.$jenisMesinModel->getIdJenisMesin().'"');
+            if($checkInSewa->num_rows<=0){
+                return true;
+            }
+        }
+
+        return false;
 
     }
 

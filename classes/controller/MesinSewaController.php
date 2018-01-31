@@ -8,7 +8,9 @@ class MesinSewaController{
     var $successInsert = "Tambah mesin sewa berhasil";
     var $successUpdate = "Ubah mesin sewa berhasil";
     var $successDelete = "Hapus mesin sewa berhasil";
+    var $failedDelete = "Hapus mesin inventori gagal";
     var $errorNotUnique = "Nomor mesin sewa harus unik";
+    var $failedChangeStatus = "Ubah status mesin gagal";
 
     var $tbMesinSewa = "tb_mesin_sewa";
     var $tbJenisMesin = "tb_jenis_mesin";
@@ -127,7 +129,7 @@ class MesinSewaController{
             }
         }else{
             $result->setIsSuccess(false);
-            $result->setMessage($this->errorNotUnique);
+            $result->setMessage($this->failedChangeStatus);
         }
 
 
@@ -152,7 +154,7 @@ class MesinSewaController{
             }
         }else{
             $result->setIsSuccess(false);
-            $result->setMessage($this->errorNotUnique);
+            $result->setMessage($this->failedDelete);
         }
 
         return $result;

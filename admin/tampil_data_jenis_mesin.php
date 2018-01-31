@@ -89,7 +89,7 @@ include '_header.php';
                                             echo "<td>
                                                         <a href=\"ubah_data_jenis_mesin.php?id_jenis_mesin=".$data->getIdJenisMesin()."&nama_jenis_mesin=".$data->getNamaJenisMesin()."&kode_jenis_mesin=".$data->getKodeJenisMesin()."\" class=\"btn btn-primary btn-xs\"><i
                                                                     class=\"fa fa-pencil\"></i></a>
-                                                        <a href=\"hapus_data_jenis_mesin.php\" class=\"btn btn-danger btn-xs\" onclick=\"return konfirmasiHapus()\"><i
+                                                        <a href=\"proses_jenis_mesin.php?aksi=delete&id=".$data->getIdJenisMesin()."\" class=\"btn btn-danger btn-xs\" onclick=\"return konfirmasiHapus()\"><i
                                                                     class=\"fa fa-trash-o \"></i></a>
                                                   </td>";
                                             echo "</tr>";
