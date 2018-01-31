@@ -48,10 +48,18 @@ switch ($aksi){
         break;
 
     case 'delete':
-        $mesinInventoriModel->setIdMesinInventori($_GET['id_mesin']);
-        $mesinInventoriModel->setNomorMesinInventori($_GET['no_mesin']);
+        //jika status mesin = 3, maka tidak bisa dihapus
+        if($_GET['status_mesin']==3){
 
-        $result = $mesinInventoriController->delete($mesinInventoriModel);
+            $result->setIsSuccess(false);
+            $result->setMessage("Tidak bisa hapus data, karena status mesin sedang diperbaiki");
+        }else{
+            $mesinInventoriModel->setIdMesinInventori($_GET['id_mesin']);
+            $mesinInventoriModel->setNomorMesinInventori($_GET['no_mesin']);
+            $result = $mesinInventoriController->delete($mesinInventoriModel);
+        }
+
+
 
         break;
 

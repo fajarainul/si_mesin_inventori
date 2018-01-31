@@ -69,10 +69,17 @@ switch ($aksi){
         break;
 
     case 'delete':
-        $mesinSewaModel->setIdMesinSewa($_GET['id_mesin']);
-        $mesinSewaModel->setNomorMesinSewa($_GET['no_mesin']);
+        if($_GET['status_mesin']==3){
 
-        $result = $mesinSewaController->delete($mesinSewaModel);
+            $result->setIsSuccess(false);
+            $result->setMessage("Tidak bisa hapus data, karena status mesin sedang diperbaiki");
+        }else{
+            $mesinSewaModel->setIdMesinSewa($_GET['id_mesin']);
+            $mesinSewaModel->setNomorMesinSewa($_GET['no_mesin']);
+
+            $result = $mesinSewaController->delete($mesinSewaModel);
+        }
+
 
         break;
 

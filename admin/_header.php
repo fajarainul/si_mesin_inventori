@@ -1,3 +1,16 @@
+<?php
+
+    session_start();
+
+    if(isset($_SESSION['username'])){
+        if($_SESSION['level']=="teknisi"){
+            header("Location: ../teknisi/index.php");
+        }
+    }else{
+        header("Location: ../index.php");
+    }
+
+?>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

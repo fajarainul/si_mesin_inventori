@@ -1,6 +1,4 @@
 <?php
-session_start();
-
 require_once '../classes/controller/JenisMesinController.php';
 require_once '../classes/model/JenisMesinModel.php';
 

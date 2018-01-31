@@ -1,6 +1,4 @@
 <?php
-session_start();
-
 require_once '../classes/controller/MesinSewaController.php';
 require_once '../classes/model/MesinSewaModel.php';
 ?>
@@ -127,7 +125,7 @@ include '_header.php';
                                         echo "<td>
                                                         <a href=\"ubah_data_mesin_sewa.php?no_mesin=".$data->getNomorMesinSewa()."&id_jenis_mesin=".$data->getIdJenisMesin()."&lokasi_mesin=".$data->getLokasiMesinSewa()."&id_mesin=".$data->getIdMesinSewa()."&tgl_masuk=".$data->getTanggalMasukMesinSewa()."&tgl_keluar=".$data->getTanggalKeluarMesinSewa()."&status_mesin=".$data->getStatusMesinSewa()."\" class=\"btn btn-primary btn-xs\"><i
                                                         class=\"fa fa-pencil\"></i></a>
-                                                        <a href=\"proses_mesin_sewa.php?aksi=delete&no_mesin=".$data->getNomorMesinSewa()."&id_mesin=".$data->getIdMesinSewa()."\" class=\"btn btn-danger btn-xs\" onclick=\"return konfirmasiHapus()\"><i class=\"fa fa-trash-o \"></i></a>
+                                                        <a href=\"proses_mesin_sewa.php?aksi=delete&no_mesin=".$data->getNomorMesinSewa()."&id_mesin=".$data->getIdMesinSewa()."&status_mesin=".$data->getStatusMesinSewa()."\" class=\"btn btn-danger btn-xs\" onclick=\"return konfirmasiHapus()\"><i class=\"fa fa-trash-o \"></i></a>
                                               </td>";
 
                                         echo "</tr>";

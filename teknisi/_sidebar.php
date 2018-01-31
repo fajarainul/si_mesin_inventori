@@ -8,7 +8,7 @@
         <ul class="sidebar-menu" id="nav-accordion">
 
             <p class="centered"><a href="#"><img src="../assets/img/ui-sam.jpg" class="img-circle" width="60"></a></p>
-            <h5 class="centered">Teknisi</h5>
+            <h5 class="centered"><?php echo $_SESSION['username']?></h5>
 
             <li>
                 <a href="tampil_data_mesin.php">

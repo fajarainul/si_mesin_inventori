@@ -30,7 +30,7 @@ include '_header.php';
                         <div class="text-center">
                             <h2 class>Selamat Datang....</h2>
                             <p style="font-size:20px">Di Sistem Informasi Data Inventori PT Fast Manufacturing</p>
-                            <p style="font-size:16px"><b>Anda Login sebagai TEKNISI</b></p>
+                            <p style="font-size:16px"><b>Anda Login sebagai <?php echo $_SESSION['username']?></b></p>
                         </div>
                     </div
                 </div>

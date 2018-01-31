@@ -1,6 +1,4 @@
 <?php
-session_start();
-
 require_once '../classes/controller/MesinInventoriController.php';
 require_once '../classes/model/MesinInventoriModel.php';
 
@@ -120,7 +118,7 @@ include '_header.php';
                                         echo "<td>
                                                         <a href=\"ubah_data_mesin_inventori.php?no_mesin=".$data->getNomorMesinInventori()."&id_jenis_mesin=".$data->getIdJenisMesin()."&lokasi_mesin=".$data->getLokasiMesinInventori()."&id_mesin=".$data->getIdMesinInventori()."&tgl_masuk=".$data->getTanggalMasukMesinInventori()."&status_mesin=".$data->getStatusMesinInventori()."\" class=\"btn btn-primary btn-xs\"><i
                                                         class=\"fa fa-pencil\"></i></a>
-                                                        <a href=\"proses_mesin_inventori.php?aksi=delete&no_mesin=".$data->getNomorMesinInventori()."&id_mesin=".$data->getIdMesinInventori()."\" class=\"btn btn-danger btn-xs\" onclick=\"return konfirmasiHapus()\"><i class=\"fa fa-trash-o \"></i></a>
+                                                        <a href=\"proses_mesin_inventori.php?aksi=delete&no_mesin=".$data->getNomorMesinInventori()."&id_mesin=".$data->getIdMesinInventori()."&status_mesin=".$data->getStatusMesinInventori()."\" class=\"btn btn-danger btn-xs\" onclick=\"return konfirmasiHapus()\"><i class=\"fa fa-trash-o \"></i></a>
                                               </td>";
 
                                         echo "</tr>";

@@ -1,6 +1,4 @@
 <?php
-session_start();
-
 $kodeJenisMesin = $_GET['kode_jenis_mesin'];
 $namaJenisMesin = $_GET['nama_jenis_mesin'];
 $idJenisMesin = $_GET['id_jenis_mesin'];
