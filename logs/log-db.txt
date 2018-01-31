@@ -17,3 +17,9 @@ CREATE TABLE `si_mesin_inventori`.`tb_mesin_sewa` ( `id_mesin_sewa` INT NOT NULL
 
 //ALTER TABLE MESIN SEWA
 ALTER TABLE `tb_mesin_sewa` CHANGE `status_mesin_sewa` `status_mesin_sewa` VARCHAR(8) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL COMMENT 'status = 1 jika kondisi baik, status = 2 jika mesin perlu pebaikan, status = 3 jika mesin sedang diperbaiki, status = 4 jika mesin selesai diperbaiki, status = 5 jika mesin rusak total ';
+
+//BUAT TABEL USER
+CREATE TABLE `si_mesin_inventori`.`tb_user` ( `id_user` INT NOT NULL AUTO_INCREMENT , `username` INT(32) NOT NULL , `password` INT(64) NOT NULL , `level` VARCHAR(32) NOT NULL , PRIMARY KEY (`id_user`)) ENGINE = InnoDB;
+
+//alter tabel user
+ALTER TABLE `tb_user` CHANGE `username` `username` VARCHAR(32) NOT NULL, CHANGE `password` `password` VARCHAR(64) NOT NULL;

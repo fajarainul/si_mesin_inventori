@@ -1,6 +1,4 @@
 <?php
-session_start();
-
 require_once '../classes/controller/MesinSewaController.php';
 require_once '../classes/model/MesinSewaModel.php';
 ?>

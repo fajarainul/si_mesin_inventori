@@ -1,6 +1,4 @@
 <?php
-session_start();
-
 require_once '../classes/controller/MesinInventoriController.php';
 require_once '../classes/model/MesinInventoriModel.php';
 

@@ -21,7 +21,7 @@ class JenisMesinController{
     {
         $result = new Result();
 
-        if($this->checkIfDataExist($jenisMesinModel)){
+        if(!$this->checkIfDataExist($jenisMesinModel)){
             $insert = $this->connection->query('INSERT into '.$this->tbName.'(nama_jenis_mesin,kode_jenis_mesin) VALUES("'.$jenisMesinModel->getNamaJenisMesin().'", "'.$jenisMesinModel->getKodeJenisMesin().'")');
 
             if(!$insert){
@@ -50,7 +50,7 @@ class JenisMesinController{
     {
         $result = new Result();
 
-        if($this->checkIfDataExist($jenisMesinModel)){
+        if(!$this->checkIfDataExist($jenisMesinModel)){
 
             $update = $this->connection->query('UPDATE '.$this->tbName.' SET kode_jenis_mesin="'.$jenisMesinModel->getKodeJenisMesin().'", nama_jenis_mesin="'.$jenisMesinModel->getNamaJenisMesin().'" WHERE id_jenis_mesin='.$jenisMesinModel->getIdJenisMesin().'');
 
@@ -81,7 +81,7 @@ class JenisMesinController{
         }else{
             $checkExist = $this->connection->query('SELECT * from '.$this->tbName.' WHERE (nama_jenis_mesin = "'.$jenisMesinModel->getNamaJenisMesin().'" OR kode_jenis_mesin="'.$jenisMesinModel->getKodeJenisMesin().'") AND id_jenis_mesin!= '.$jenisMesinModel->getIdJenisMesin().'');
         }
-        if($checkExist->num_rows<=0){
+        if($checkExist->num_rows>0){
             return true;
         }else{
             return false;
