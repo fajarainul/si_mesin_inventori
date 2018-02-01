@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jan 31, 2018 at 01:31 AM
+-- Generation Time: Jan 31, 2018 at 06:12 PM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.1.9
 
@@ -58,15 +58,6 @@ CREATE TABLE `tb_mesin_inventori` (
   `tanggal_masuk_mesin_inventori` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `tb_mesin_inventori`
---
-
-INSERT INTO `tb_mesin_inventori` (`id_mesin_inventori`, `nomor_mesin_inventori`, `id_jenis_mesin`, `lokasi_mesin_inventori`, `status_mesin_inventori`, `tanggal_masuk_mesin_inventori`) VALUES
-(8, 'SN-02-2019', 17, 'Line 3', '4', '2018-02-02 00:00:00'),
-(10, 'DN-02-2018', 18, 'Line 5', '3', '2018-04-01 00:00:00'),
-(11, 'SN-03-201900', 17, 'Line 400', '1', '2018-01-31 00:00:00');
-
 -- --------------------------------------------------------
 
 --
@@ -88,8 +79,28 @@ CREATE TABLE `tb_mesin_sewa` (
 --
 
 INSERT INTO `tb_mesin_sewa` (`id_mesin_sewa`, `nomor_mesin_sewa`, `id_jenis_mesin`, `lokasi_mesin_sewa`, `status_mesin_sewa`, `tanggal_masuk_mesin_sewa`, `tanggal_keluar_mesin_sewa`) VALUES
-(14, 'SN-12345', 17, 'Line 99', '1', '1970-01-01 00:00:00', NULL),
 (15, 'SN-789000', 17, 'Line 888', '3', '2018-02-01 00:00:00', '2018-02-28 00:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_user`
+--
+
+CREATE TABLE `tb_user` (
+  `id_user` int(11) NOT NULL,
+  `username` varchar(32) NOT NULL,
+  `password` varchar(64) NOT NULL,
+  `level` varchar(32) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_user`
+--
+
+INSERT INTO `tb_user` (`id_user`, `username`, `password`, `level`) VALUES
+(1, 'administrator', '200ceb26807d6bf99fd6f4f0d1ca54d4', 'admin'),
+(2, 'teknisi', 'e21394aaeee10f917f581054d24b031f', 'teknisi');
 
 --
 -- Indexes for dumped tables
@@ -114,6 +125,12 @@ ALTER TABLE `tb_mesin_sewa`
   ADD PRIMARY KEY (`id_mesin_sewa`);
 
 --
+-- Indexes for table `tb_user`
+--
+ALTER TABLE `tb_user`
+  ADD PRIMARY KEY (`id_user`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -121,19 +138,25 @@ ALTER TABLE `tb_mesin_sewa`
 -- AUTO_INCREMENT for table `tb_jenis_mesin`
 --
 ALTER TABLE `tb_jenis_mesin`
-  MODIFY `id_jenis_mesin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id_jenis_mesin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `tb_mesin_inventori`
 --
 ALTER TABLE `tb_mesin_inventori`
-  MODIFY `id_mesin_inventori` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_mesin_inventori` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `tb_mesin_sewa`
 --
 ALTER TABLE `tb_mesin_sewa`
-  MODIFY `id_mesin_sewa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id_mesin_sewa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
+--
+-- AUTO_INCREMENT for table `tb_user`
+--
+ALTER TABLE `tb_user`
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
