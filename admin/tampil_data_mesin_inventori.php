@@ -71,6 +71,8 @@ include '_header.php';
                                     <th>Lokasi Mesin</th>
                                     <th>Status Mesin</th>
                                     <th>Tanggal Masuk</th>
+                                    <th>Tanggal Mulai Perbaikan</th>
+                                    <th>Tanggal Selesai Perbaikan</th>
                                     <th>Aksi</th>
                                 </tr>
                                 </thead>
@@ -105,6 +107,17 @@ include '_header.php';
 
                                         $tglMasuk = date("d F Y", strtotime($data->getTanggalMasukMesinInventori()) );
 
+                                        if($data->getTanggalMulaiPerbaikan()!=null){
+                                            $tglMulaiPerbaikan = date("d F Y", strtotime($data->getTanggalMulaiPerbaikan()) );
+                                        }else{
+                                            $tglMulaiPerbaikan = "-";
+                                        }
+
+                                        if($data->getTanggalSelesaiPerbaikan()!=null){
+                                            $tglSelesaiPerbaikan = date("d F Y", strtotime($data->getTanggalSelesaiPerbaikan()) );
+                                        }else{
+                                            $tglSelesaiPerbaikan = "-";
+                                        }
 
                                         echo "<tr>";
 
@@ -114,6 +127,8 @@ include '_header.php';
                                         echo "<td>" . $data->getLokasiMesinInventori() . "</td>";
                                         echo "<td><span class=\"label label-".$classLabel."\">" . $statusText . "</span></td>";
                                         echo "<td>" . $tglMasuk . "</td>";
+                                        echo "<td>" . $tglMulaiPerbaikan . "</td>";
+                                        echo "<td>" . $tglSelesaiPerbaikan . "</td>";
 
                                         echo "<td>
                                                         <a href=\"ubah_data_mesin_inventori.php?no_mesin=".$data->getNomorMesinInventori()."&id_jenis_mesin=".$data->getIdJenisMesin()."&lokasi_mesin=".$data->getLokasiMesinInventori()."&id_mesin=".$data->getIdMesinInventori()."&tgl_masuk=".$data->getTanggalMasukMesinInventori()."&status_mesin=".$data->getStatusMesinInventori()."\" class=\"btn btn-primary btn-xs\"><i

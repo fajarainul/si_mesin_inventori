@@ -70,6 +70,8 @@ include '_header.php';
                                     <th>Status Mesin</th>
                                     <th>Tanggal Masuk</th>
                                     <th>Tanggal Keluar</th>
+                                    <th>Tanggal Mulai Perbaikan</th>
+                                    <th>Tanggal Selesai Perbaikan</th>
                                     <th>Aksi</th>
                                 </tr>
                                 </thead>
@@ -110,6 +112,18 @@ include '_header.php';
                                             $tglKeluar = "-";
                                         }
 
+                                        if($data->getTanggalMulaiPerbaikan()!=null){
+                                            $tglMulaiPerbaikan = date("d F Y", strtotime($data->getTanggalMulaiPerbaikan()) );
+                                        }else{
+                                            $tglMulaiPerbaikan = "-";
+                                        }
+
+                                        if($data->getTanggalSelesaiPerbaikan()!=null){
+                                            $tglSelesaiPerbaikan = date("d F Y", strtotime($data->getTanggalSelesaiPerbaikan()) );
+                                        }else{
+                                            $tglSelesaiPerbaikan = "-";
+                                        }
+
 
 
                                         echo "<tr>";
@@ -121,6 +135,8 @@ include '_header.php';
                                         echo "<td><span class=\"label label-".$classLabel."\">" . $statusText . "</span></td>";
                                         echo "<td>" . $tglMasuk . "</td>";
                                         echo "<td>" . $tglKeluar . "</td>";
+                                        echo "<td>" . $tglMulaiPerbaikan . "</td>";
+                                        echo "<td>" . $tglSelesaiPerbaikan . "</td>";
 
                                         echo "<td>
                                                         <a href=\"ubah_data_mesin_sewa.php?no_mesin=".$data->getNomorMesinSewa()."&id_jenis_mesin=".$data->getIdJenisMesin()."&lokasi_mesin=".$data->getLokasiMesinSewa()."&id_mesin=".$data->getIdMesinSewa()."&tgl_masuk=".$data->getTanggalMasukMesinSewa()."&tgl_keluar=".$data->getTanggalKeluarMesinSewa()."&status_mesin=".$data->getStatusMesinSewa()."\" class=\"btn btn-primary btn-xs\"><i
