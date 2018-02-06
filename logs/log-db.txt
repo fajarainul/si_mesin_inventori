@@ -23,3 +23,9 @@ CREATE TABLE `si_mesin_inventori`.`tb_user` ( `id_user` INT NOT NULL AUTO_INCREM
 
 //alter tabel user
 ALTER TABLE `tb_user` CHANGE `username` `username` VARCHAR(32) NOT NULL, CHANGE `password` `password` VARCHAR(64) NOT NULL;
+
+//ALTER TABEL MESIN INVENTORI
+ALTER TABLE `tb_mesin_inventori` ADD `tanggal_mulai_perbaikan` DATETIME NULL AFTER `tanggal_masuk_mesin_inventori`, ADD `tanggal_selesai_perbaikan` DATETIME NULL AFTER `tanggal_mulai_perbaikan`;
+
+//ALTER TABEL MESIN SEWA
+ALTER TABLE `tb_mesin_sewa` ADD `tanggal_mulai_perbaikan` DATETIME NULL AFTER `tanggal_keluar_mesin_sewa`, ADD `tanggal_selesai_perbaikan` DATETIME NULL AFTER `tanggal_mulai_perbaikan`;

@@ -56,7 +56,7 @@ class MesinSewaController{
     {
         $listData = $this->connection->query('SELECT * FROM '.$this->tbMesinSewa.' 
                                                     INNER JOIN '.$this->tbJenisMesin.' 
-                                                    ON tb_mesin_sewa.id_jenis_mesin = tb_jenis_mesin.id_jenis_mesin');
+                                                    ON tb_mesin_sewa.id_jenis_mesin = tb_jenis_mesin.id_jenis_mesin ORDER BY tb_mesin_sewa.id_mesin_sewa');
 
         if(!$listData){
             die("Query gagal : ".$this->connection->error);
@@ -71,7 +71,7 @@ class MesinSewaController{
     {
         $listData = $this->connection->query('SELECT * FROM '.$this->tbMesinSewa.' 
                                                     INNER JOIN '.$this->tbJenisMesin.' 
-                                                    ON tb_mesin_sewa.id_jenis_mesin = tb_jenis_mesin.id_jenis_mesin WHERE tb_mesin_sewa.status_mesin_sewa != 1');
+                                                    ON tb_mesin_sewa.id_jenis_mesin = tb_jenis_mesin.id_jenis_mesin WHERE tb_mesin_sewa.status_mesin_sewa != 1 ORDER BY tb_mesin_sewa.id_mesin_sewa');
 
         if(!$listData){
             die("Query gagal : ".$this->connection->error);
@@ -115,10 +115,17 @@ class MesinSewaController{
     {
         $result = new Result();
 
-        $checkIfExist = $this->connection->query('SELECT * from '.$this->tbMesinSewa.' WHERE id_mesin_sewa != '.$mesinSewaModel->getIdMesinSewa().'');
+        $checkIfExist = $this->connection->query('SELECT * from '.$this->tbMesinSewa.' WHERE id_mesin_sewa = '.$mesinSewaModel->getIdMesinSewa().'');
 
         if($checkIfExist->num_rows>0){
-            $update = $this->connection->query('UPDATE '.$this->tbMesinSewa.' SET  status_mesin_sewa ="'.$mesinSewaModel->getStatusMesinSewa().'" WHERE id_mesin_sewa = '.$mesinSewaModel->getIdMesinSewa());
+            //jika status sedang perbaikan (status = 3)
+            if($mesinSewaModel->getStatusMesinSewa()==3){
+                $update = $this->connection->query('UPDATE '.$this->tbMesinSewa.' SET  status_mesin_sewa ="'.$mesinSewaModel->getStatusMesinSewa().'", tanggal_mulai_perbaikan ="'.$mesinSewaModel->getTanggalMulaiPerbaikan().'", tanggal_selesai_perbaikan = NULL WHERE id_mesin_sewa = '.$mesinSewaModel->getIdMesinSewa());
+            }
+            //jika status selesai perbaikan (status =4 )  atau rusak (status = 5)
+            else if($mesinSewaModel->getStatusMesinSewa()==4 || $mesinSewaModel->getStatusMesinSewa()==5) {
+                $update = $this->connection->query('UPDATE '.$this->tbMesinSewa.' SET  status_mesin_sewa ="'.$mesinSewaModel->getStatusMesinSewa().'", tanggal_selesai_perbaikan ="'.$mesinSewaModel->getTanggalSelesaiPerbaikan().'" WHERE id_mesin_sewa = '.$mesinSewaModel->getIdMesinSewa());
+            }
 
             if(!$update){
                 die("Query gagal : ".$this->connection->error);
@@ -128,6 +135,7 @@ class MesinSewaController{
                 $result->setMessage($this->successUpdate);
             }
         }else{
+
             $result->setIsSuccess(false);
             $result->setMessage($this->failedChangeStatus);
         }

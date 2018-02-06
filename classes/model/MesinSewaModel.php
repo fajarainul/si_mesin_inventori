@@ -9,6 +9,8 @@ class MesinSewaModel{
     var $status_mesin_sewa;
     var $tanggal_masuk_mesin_sewa;
     var $tanggal_keluar_mesin_sewa;
+    var $tanggal_mulai_perbaikan;
+    var $tanggal_selesai_perbaikan;
 
     /**
      * @return mixed
@@ -120,6 +122,38 @@ class MesinSewaModel{
     public function setTanggalKeluarMesinSewa($tanggal_keluar_mesin_sewa)
     {
         $this->tanggal_keluar_mesin_sewa = $tanggal_keluar_mesin_sewa;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTanggalMulaiPerbaikan()
+    {
+        return $this->tanggal_mulai_perbaikan;
+    }
+
+    /**
+     * @param mixed $tanggal_mulai_perbaikan
+     */
+    public function setTanggalMulaiPerbaikan($tanggal_mulai_perbaikan)
+    {
+        $this->tanggal_mulai_perbaikan = $tanggal_mulai_perbaikan;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTanggalSelesaiPerbaikan()
+    {
+        return $this->tanggal_selesai_perbaikan;
+    }
+
+    /**
+     * @param mixed $tanggal_selesai_perbaikan
+     */
+    public function setTanggalSelesaiPerbaikan($tanggal_selesai_perbaikan)
+    {
+        $this->tanggal_selesai_perbaikan = $tanggal_selesai_perbaikan;
     }
 
 

@@ -8,6 +8,8 @@ class MesinInventoriModel{
     var $lokasi_mesin_inventori;
     var $status_mesin_inventori;
     var $tanggal_masuk_mesin_inventori;
+    var $tanggal_mulai_perbaikan;
+    var $tanggal_selesai_perbaikan;
 
     /**
      * @return mixed
@@ -104,6 +106,38 @@ class MesinInventoriModel{
     public function setTanggalMasukMesinInventori($tanggal_masuk_mesin_inventori)
     {
         $this->tanggal_masuk_mesin_inventori = $tanggal_masuk_mesin_inventori;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTanggalMulaiPerbaikan()
+    {
+        return $this->tanggal_mulai_perbaikan;
+    }
+
+    /**
+     * @param mixed $tanggal_mulai_perbaikan
+     */
+    public function setTanggalMulaiPerbaikan($tanggal_mulai_perbaikan)
+    {
+        $this->tanggal_mulai_perbaikan = $tanggal_mulai_perbaikan;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTanggalSelesaiPerbaikan()
+    {
+        return $this->tanggal_selesai_perbaikan;
+    }
+
+    /**
+     * @param mixed $tanggal_selesai_perbaikan
+     */
+    public function setTanggalSelesaiPerbaikan($tanggal_selesai_perbaikan)
+    {
+        $this->tanggal_selesai_perbaikan = $tanggal_selesai_perbaikan;
     }
 
 

@@ -49,7 +49,7 @@ class MesinInventoriController{
     {
         $listData = $this->connection->query('SELECT * FROM '.$this->tbMesinInventori.' 
                                                     INNER JOIN '.$this->tbJenisMesin.' 
-                                                    ON tb_mesin_inventori.id_jenis_mesin = tb_jenis_mesin.id_jenis_mesin');
+                                                    ON tb_mesin_inventori.id_jenis_mesin = tb_jenis_mesin.id_jenis_mesin ORDER BY tb_mesin_inventori.id_mesin_inventori');
 
         if(!$listData){
             die("Query gagal : ".$this->connection->error);
@@ -64,7 +64,7 @@ class MesinInventoriController{
     {
         $listData = $this->connection->query('SELECT * FROM '.$this->tbMesinInventori.' 
                                                     INNER JOIN '.$this->tbJenisMesin.' 
-                                                    ON tb_mesin_inventori.id_jenis_mesin = tb_jenis_mesin.id_jenis_mesin WHERE tb_mesin_inventori.status_mesin_inventori!=1');
+                                                    ON tb_mesin_inventori.id_jenis_mesin = tb_jenis_mesin.id_jenis_mesin WHERE tb_mesin_inventori.status_mesin_inventori!=1 ORDER BY tb_mesin_inventori.id_mesin_inventori');
 
         if(!$listData){
             die("Query gagal : ".$this->connection->error);
@@ -103,10 +103,17 @@ class MesinInventoriController{
     {
         $result = new Result();
 
-        $checkIfExist = $this->connection->query('SELECT * from '.$this->tbMesinInventori.' WHERE id_mesin_inventori != '.$mesinInventoriModel->getIdMesinInventori().'');
+        $checkIfExist = $this->connection->query('SELECT * from '.$this->tbMesinInventori.' WHERE id_mesin_inventori = '.$mesinInventoriModel->getIdMesinInventori().'');
 
         if($checkIfExist->num_rows>0){
-            $update = $this->connection->query('UPDATE '.$this->tbMesinInventori.' SET  status_mesin_inventori ="'.$mesinInventoriModel->getStatusMesinInventori().'" WHERE id_mesin_inventori = '.$mesinInventoriModel->getIdMesinInventori());
+            //jika status sedang perbaikan (status = 3)
+            if($mesinInventoriModel->getStatusMesinInventori()==3){
+                $update = $this->connection->query('UPDATE '.$this->tbMesinInventori.' SET  status_mesin_inventori ="'.$mesinInventoriModel->getStatusMesinInventori().'", tanggal_mulai_perbaikan ="'.$mesinInventoriModel->getTanggalMulaiPerbaikan().'", tanggal_selesai_perbaikan = NULL WHERE id_mesin_inventori = '.$mesinInventoriModel->getIdMesinInventori());
+            }
+            //jika status selesai perbaikan (status =4 ) atau rusak (status = 5)
+            else if($mesinInventoriModel->getStatusMesinInventori()==4 || $mesinInventoriModel->getStatusMesinInventori()==5){
+                $update = $this->connection->query('UPDATE '.$this->tbMesinInventori.' SET  status_mesin_inventori ="'.$mesinInventoriModel->getStatusMesinInventori().'", tanggal_selesai_perbaikan ="'.$mesinInventoriModel->getTanggalSelesaiPerbaikan().'" WHERE id_mesin_inventori = '.$mesinInventoriModel->getIdMesinInventori());
+            }
 
             if(!$update){
                 die("Query gagal : ".$this->connection->error);
