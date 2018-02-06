@@ -107,7 +107,16 @@
 
 
 
+        <div style="text-align: center;page-break-before: always;">
 
+            <p><span style="font-size: 16px"><b>Data Laporan Mesin Inventori dan Mesin Sewa</b></span>
+                <br>PT Fast Manufacturing
+                <br><span style="font-size: 12px">JL Walisongo, Km 11, Kawasan, Tambakaji, Ngaliyan
+            <br>Kota Semarang, Jawa Tengah 50185</span>
+            </p>
+
+
+        </div>
 
         <p style="font-size: 20px"><b>Mesin Inventori</b></p>
         <table class="table table-bordered" style="font-size: 12px">

@@ -32,6 +32,14 @@
                 </a>
             </li>
 
+            <li>
+                <a href="eksport_pdf.php">
+                    <i class="fa fa-file"></i>
+                    <span>Eksport Laporan</span>
+                </a>
+            </li>
+
+
         </ul>
         <!-- sidebar menu end-->
     </div>
