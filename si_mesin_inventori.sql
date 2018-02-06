@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jan 31, 2018 at 06:12 PM
+-- Generation Time: Feb 06, 2018 at 06:34 PM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.1.9
 
@@ -55,8 +55,18 @@ CREATE TABLE `tb_mesin_inventori` (
   `id_jenis_mesin` int(4) NOT NULL,
   `lokasi_mesin_inventori` varchar(8) NOT NULL,
   `status_mesin_inventori` varchar(8) NOT NULL COMMENT 'status = 1 jika kondisi baik, status = 2 jika mesin perlu pebaikan, status = 3 jika mesin sedang diperbaiki, status = 4 jika mesin selesai diperbaiki, status = 5 jika mesin rusak total',
-  `tanggal_masuk_mesin_inventori` datetime NOT NULL
+  `tanggal_masuk_mesin_inventori` datetime NOT NULL,
+  `tanggal_mulai_perbaikan` datetime DEFAULT NULL,
+  `tanggal_selesai_perbaikan` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_mesin_inventori`
+--
+
+INSERT INTO `tb_mesin_inventori` (`id_mesin_inventori`, `nomor_mesin_inventori`, `id_jenis_mesin`, `lokasi_mesin_inventori`, `status_mesin_inventori`, `tanggal_masuk_mesin_inventori`, `tanggal_mulai_perbaikan`, `tanggal_selesai_perbaikan`) VALUES
+(2, '323232', 17, 'Line 3', '5', '2018-03-05 00:00:00', NULL, NULL),
+(4, 'SN-03-201900', 18, 'Line 3', '4', '2018-03-05 00:00:00', '2018-02-06 16:49:53', '2018-02-06 16:50:05');
 
 -- --------------------------------------------------------
 
@@ -71,15 +81,18 @@ CREATE TABLE `tb_mesin_sewa` (
   `lokasi_mesin_sewa` varchar(8) NOT NULL,
   `status_mesin_sewa` varchar(8) NOT NULL COMMENT 'status = 1 jika kondisi baik, status = 2 jika mesin perlu pebaikan, status = 3 jika mesin sedang diperbaiki, status = 4 jika mesin selesai diperbaiki, status = 5 jika mesin rusak total ',
   `tanggal_masuk_mesin_sewa` datetime NOT NULL,
-  `tanggal_keluar_mesin_sewa` datetime DEFAULT NULL
+  `tanggal_keluar_mesin_sewa` datetime DEFAULT NULL,
+  `tanggal_mulai_perbaikan` datetime DEFAULT NULL,
+  `tanggal_selesai_perbaikan` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tb_mesin_sewa`
 --
 
-INSERT INTO `tb_mesin_sewa` (`id_mesin_sewa`, `nomor_mesin_sewa`, `id_jenis_mesin`, `lokasi_mesin_sewa`, `status_mesin_sewa`, `tanggal_masuk_mesin_sewa`, `tanggal_keluar_mesin_sewa`) VALUES
-(15, 'SN-789000', 17, 'Line 888', '3', '2018-02-01 00:00:00', '2018-02-28 00:00:00');
+INSERT INTO `tb_mesin_sewa` (`id_mesin_sewa`, `nomor_mesin_sewa`, `id_jenis_mesin`, `lokasi_mesin_sewa`, `status_mesin_sewa`, `tanggal_masuk_mesin_sewa`, `tanggal_keluar_mesin_sewa`, `tanggal_mulai_perbaikan`, `tanggal_selesai_perbaikan`) VALUES
+(15, 'SN-789000', 17, 'Line 888', '5', '2018-02-01 00:00:00', '2018-02-28 00:00:00', '2018-02-06 16:50:19', '2018-02-06 16:50:35'),
+(16, 'SN', 17, 'Line 99', '4', '2018-02-28 00:00:00', NULL, '2018-02-06 16:50:48', NULL);
 
 -- --------------------------------------------------------
 
@@ -138,19 +151,19 @@ ALTER TABLE `tb_user`
 -- AUTO_INCREMENT for table `tb_jenis_mesin`
 --
 ALTER TABLE `tb_jenis_mesin`
-  MODIFY `id_jenis_mesin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id_jenis_mesin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `tb_mesin_inventori`
 --
 ALTER TABLE `tb_mesin_inventori`
-  MODIFY `id_mesin_inventori` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id_mesin_inventori` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tb_mesin_sewa`
 --
 ALTER TABLE `tb_mesin_sewa`
-  MODIFY `id_mesin_sewa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id_mesin_sewa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `tb_user`
