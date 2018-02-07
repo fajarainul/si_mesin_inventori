@@ -62,9 +62,9 @@ MAIN CONTENT
                 }
                 ?>
 
-                <input type="text" class="form-control" placeholder="Username" autofocus name="username">
+                <input type="text" class="form-control" placeholder="Username" autofocus name="username" required="required">
                 <br>
-                <input type="password" class="form-control" placeholder="Password" name="password">
+                <input type="password" class="form-control" placeholder="Password" name="password" required="required">
 
                 <br>
                 <button class="btn btn-theme btn-block" type="submit"><i class="fa fa-lock"></i> SIGN IN</button>

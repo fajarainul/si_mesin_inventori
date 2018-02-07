@@ -33,6 +33,37 @@ include '_header.php';
                     <div class="showback">
                         <h4><i class="fa fa-angle-right"></i> Tambah Mesin Inventori</h4>
                         <hr>
+                        <?php
+
+                        if(isset($_SESSION['success'])){
+
+                            if(!$_SESSION['success']) {
+
+                                echo '<div class="alert alert-danger">'.$_SESSION['message'].'<br><br>';
+
+                                $errors = $_SESSION['errors'];
+                                if(sizeof($errors)>0){
+
+                                    foreach ($errors as $error){
+                                        echo $error;echo '<br>';
+                                    }
+
+                                }
+
+                                echo '</div>';
+
+                                $entries = $_SESSION['entries'];
+
+                            }
+
+                            unset($_SESSION['success']);
+                            unset($_SESSION['message']);
+                            unset($_SESSION['errors']);
+                            unset($_SESSION['entries']);
+
+                        }
+
+                        ?>
                         <!-- DIV FORMS -->
                         <div class="text-right">
                             <form method="POST" action="proses_mesin_inventori.php?aksi=insert">
@@ -43,7 +74,7 @@ include '_header.php';
                                     <div class="col-sm-4">
                                         <input type="text" class="form-control" id="nomorMesin"
                                                name="nomorMesinInventori" placeholder="Nomor Mesin Inventori"
-                                               required="required">
+                                               required="required" value="<?php echo isset($entries['nomorMesinInventori'])? $entries['nomorMesinInventori'] : ''; ?>" >
                                     </div>
 
                                     <label for="jenisMesin" class="col-sm-2 col-form-label">Jenis Mesin</label>
@@ -73,13 +104,14 @@ include '_header.php';
                                     <div class="col-sm-4">
                                         <input type="text" class="form-control" id="lokasiMesin"
                                                name="lokasiMesinInventori"
-                                               placeholder="Lokasi Mesin Inventori" required="required">
+                                               placeholder="Lokasi Mesin Inventori"
+                                               required="required" value="<?php echo isset($entries['lokasiMesinInventori'])? $entries['lokasiMesinInventori'] :'';?>">
                                     </div>
 
                                     <label for="statusMesin" class="col-sm-2 col-form-label">Status Mesin</label>
                                     <div class="col-sm-4">
                                         <select class="form-control" id="statusMesin" name="statusMesinInventori"
-                                                required="required">
+                                                required="required"   >
                                             <option value="1">Baik</option>
                                             <option value="2">Perlu Perbaikan</option>
                                             <option value="5">Rusak Total</option>
@@ -94,7 +126,8 @@ include '_header.php';
                                     <div class="col-sm-4">
                                         <input type="text" class="form-control datepicker" id="tglMasuk"
                                                name="tanggalMasukMesinInventori"
-                                               placeholder="Tanggal Masuk" required="required">
+                                               placeholder="Tanggal Masuk"
+                                               required="required" value="<?php echo isset($entries['tanggalMasukMesinInventori'])? $entries['tanggalMasukMesinInventori'] : ''; ?>" >
                                     </div>
 
                                     <!--<label for="tglKeluar" class="col-sm-2 col-form-label">Tanggal Keluar</label>

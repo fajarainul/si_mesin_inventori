@@ -33,6 +33,37 @@ include '_header.php';
                 <div class="showback">
                   <h4><i class="fa fa-angle-right"></i> Tambah Mesin Sewa</h4>
                   <hr>
+                    <?php
+
+                    if(isset($_SESSION['success'])){
+
+                        if(!$_SESSION['success']) {
+
+                            echo '<div class="alert alert-danger">'.$_SESSION['message'].'<br><br>';
+
+                            $errors = $_SESSION['errors'];
+                            if(sizeof($errors)>0){
+
+                                foreach ($errors as $error){
+                                    echo $error;echo '<br>';
+                                }
+
+                            }
+
+                            echo '</div>';
+
+                            $entries = $_SESSION['entries'];
+
+                        }
+
+                        unset($_SESSION['success']);
+                        unset($_SESSION['message']);
+                        unset($_SESSION['errors']);
+                        unset($_SESSION['entries']);
+
+                    }
+
+                    ?>
                   <!-- DIV FORMS -->
                   <div class="text-right">
                     <form action="proses_mesin_sewa.php?aksi=insert" method="post">
@@ -40,7 +71,7 @@ include '_header.php';
 
                         <label for="nomorMesin" class="col-sm-2 col-form-label">Nomor Mesin Sewa</label>
                         <div class="col-sm-4">
-                          <input type="text" class="form-control" id="nomorMesin" placeholder="Nomor Mesin Sewa" name="nomorMesinSewa" required="required">
+                          <input type="text" class="form-control" id="nomorMesin" placeholder="Nomor Mesin Sewa" name="nomorMesinSewa" required="required" value="<?php echo isset($entries['nomorMesinSewa'])? $entries['nomorMesinSewa'] : ''; ?>">
                         </div>
 
                         <label for="jenisMesin" class="col-sm-2 col-form-label">Jenis Mesin</label>
@@ -68,7 +99,7 @@ include '_header.php';
 
                         <label for="lokasiMesin" class="col-sm-2 col-form-label">Lokasi Mesin Sewa</label>
                         <div class="col-sm-4">
-                          <input type="text" class="form-control" id="lokasiMesin" placeholder="Lokasi Mesin Sewa" name="lokasiMesinSewa" required="required">
+                          <input type="text" class="form-control" id="lokasiMesin" placeholder="Lokasi Mesin Sewa" name="lokasiMesinSewa" required="required" value="<?php echo isset($entries['lokasiMesinSewa'])? $entries['lokasiMesinSewa'] : ''; ?>">
                         </div>
 
                         <label for="statusMesin" class="col-sm-2 col-form-label">Status Mesin</label>
@@ -86,12 +117,12 @@ include '_header.php';
 
                         <label for="tglMasuk" class="col-sm-2 col-form-label">Tanggal Masuk</label>
                         <div class="col-sm-4">
-                          <input type="text" class="form-control datepicker" id="tglMasuk" placeholder="Tanggal Masuk" name="tanggalMasukMesinSewa" required="required">
+                          <input type="text" class="form-control datepicker" id="tglMasuk" placeholder="Tanggal Masuk" name="tanggalMasukMesinSewa" required="required" value="<?php echo isset($entries['tanggalMasukMesinSewa'])? $entries['tanggalMasukMesinSewa'] : ''; ?>">
                         </div>
 
                         <label for="tglKeluar" class="col-sm-2 col-form-label">Tanggal Keluar</label>
                         <div class="col-sm-4">
-                          <input type="text" class="form-control" id="tglKeluar" placeholder="Tanggal Keluar" name="tanggalKeluarMesinSewa">
+                          <input type="text" class="form-control" id="tglKeluar" placeholder="Tanggal Keluar" name="tanggalKeluarMesinSewa" value="<?php echo isset($entries['tanggalKeluarMesinSewa'])? $entries['tanggalKeluarMesinSewa'] : ''; ?>">
                         </div>
 
                       </div>

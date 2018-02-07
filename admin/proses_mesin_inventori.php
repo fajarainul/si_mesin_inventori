@@ -5,45 +5,94 @@ session_start();
 require_once '../classes/controller/MesinInventoriController.php';
 require_once '../classes/model/MesinInventoriModel.php';
 require_once '../classes/Result.php';
+require_once '../classes/validation/FormValidator.php';
+require_once '../classes/validation/ValidationRule.php';
 
 $aksi = $_GET['aksi'];
 
 $mesinInventoriController = new MesinInventoriController();
 $mesinInventoriModel = new MesinInventoriModel();
 $result = new Result();
+$validator = new FormValidator();
+
+$errors = array();
 
 
 switch ($aksi){
     case 'insert':
-        $tglMasuk = $_POST['tanggalMasukMesinInventori'];
+        $validator->addRule('nomorMesinInventori', 'Nomor mesin inventori mesin harus diisi', 'required');
+        $validator->addRule('jenisMesinInventori', 'Jenis mesin inventori harus diisi', 'required');
+        $validator->addRule('lokasiMesinInventori', 'Lokasi mesin inventori harus diisi', 'required');
+        $validator->addRule('statusMesinInventori', 'Status mesin inventori harus diisi', 'required');
+        $validator->addRule('tanggalMasukMesinInventori', 'Tanggal masuk mesin inventori harus diisi', 'required');
 
-        $tglMasuk = date("Y-m-d", strtotime($tglMasuk) );
+        $validator->addEntries($_POST);
+        $validator->validate();
 
-        $mesinInventoriModel->setNomorMesinInventori($_POST['nomorMesinInventori']);
-        $mesinInventoriModel->setIdJenisMesin($_POST['jenisMesinInventori']);
-        $mesinInventoriModel->setLokasiMesinInventori($_POST['lokasiMesinInventori']);
-        $mesinInventoriModel->setStatusMesinInventori($_POST['statusMesinInventori']);
-        $mesinInventoriModel->setTanggalMasukMesinInventori($tglMasuk);
+        $entries = $validator->getEntries();
 
-        $result = $mesinInventoriController->create($mesinInventoriModel);
+
+        if ($validator->foundErrors()) {
+
+            $errors = $validator->getErrors();
+            $result->setMessage("Ooopss, terjadi error. Lihat pesan dibawah");
+            $result->setIsSuccess(false);
+
+        }else{
+
+            $tglMasuk = $entries['tanggalMasukMesinInventori'];
+
+            $tglMasuk = date("Y-m-d", strtotime($tglMasuk) );
+
+            $mesinInventoriModel->setNomorMesinInventori($entries['nomorMesinInventori']);
+            $mesinInventoriModel->setIdJenisMesin($entries['jenisMesinInventori']);
+            $mesinInventoriModel->setLokasiMesinInventori($entries['lokasiMesinInventori']);
+            $mesinInventoriModel->setStatusMesinInventori($entries['statusMesinInventori']);
+            $mesinInventoriModel->setTanggalMasukMesinInventori($tglMasuk);
+
+            $result = $mesinInventoriController->create($mesinInventoriModel);
+        }
 
         break;
 
     case 'edit':
+        $validator->addRule('nomorMesinInventori', 'Nomor mesin inventori mesin harus diisi', 'required');
+        $validator->addRule('jenisMesinInventori', 'Jenis mesin inventori harus diisi', 'required');
+        $validator->addRule('lokasiMesinInventori', 'Lokasi mesin inventori harus diisi', 'required');
+        $validator->addRule('statusMesinInventori', 'Status mesin inventori harus diisi', 'required');
+        $validator->addRule('tanggalMasukMesinInventori', 'Tanggal masuk mesin inventori harus diisi', 'required');
 
-        $tglMasuk = $_POST['tanggalMasukMesinInventori'];
+        $validator->addEntries($_POST);
+        $validator->validate();
 
-        $tglMasuk = date("Y-m-d", strtotime($tglMasuk) );
+        $entries = $validator->getEntries();
 
-        $mesinInventoriModel->setNomorMesinInventori($_POST['nomorMesinInventori']);
-        $mesinInventoriModel->setIdJenisMesin($_POST['jenisMesinInventori']);
-        $mesinInventoriModel->setLokasiMesinInventori($_POST['lokasiMesinInventori']);
-        $mesinInventoriModel->setStatusMesinInventori($_POST['statusMesinInventori']);
-        $mesinInventoriModel->setTanggalMasukMesinInventori($tglMasuk);
-        $mesinInventoriModel->setIdMesinInventori($_GET['id']);
+        //print_r($entries);die();
 
 
-        $result = $mesinInventoriController->update($mesinInventoriModel);
+        if ($validator->foundErrors()) {
+
+            $errors = $validator->getErrors();
+            $entries['idMesinInventori'] = $_GET['id'];
+            $result->setMessage("Ooopss, terjadi error. Lihat pesan dibawah");
+            $result->setIsSuccess(false);
+
+        }else{
+
+            $tglMasuk = $entries['tanggalMasukMesinInventori'];
+
+            $tglMasuk = date("Y-m-d", strtotime($tglMasuk) );
+
+            $mesinInventoriModel->setNomorMesinInventori($entries['nomorMesinInventori']);
+            $mesinInventoriModel->setIdJenisMesin($entries['jenisMesinInventori']);
+            $mesinInventoriModel->setLokasiMesinInventori($entries['lokasiMesinInventori']);
+            $mesinInventoriModel->setStatusMesinInventori($entries['statusMesinInventori']);
+            $mesinInventoriModel->setTanggalMasukMesinInventori($tglMasuk);
+            $mesinInventoriModel->setIdMesinInventori($_GET['id']);
+
+
+            $result = $mesinInventoriController->update($mesinInventoriModel);
+        }
 
         break;
 
@@ -68,7 +117,17 @@ switch ($aksi){
 
 $_SESSION['message'] = $result->getMessage();
 $_SESSION['success'] = $result->getisSuccess();
+$_SESSION['errors'] = $errors;
+$_SESSION['entries'] = $entries;
 
-header("Location: tampil_data_mesin_inventori.php");
+if(sizeof($errors)<=0){
+    header("Location: tampil_data_mesin_inventori.php");
+}else{
 
+    if($aksi=='insert'){
+        header("Location: tambah_data_mesin_inventori.php");
+    }else if ($aksi=='edit'){
+        header("Location: ubah_data_mesin_inventori.php");
+    }
+}
 ?>

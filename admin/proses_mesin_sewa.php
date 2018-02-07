@@ -5,6 +5,8 @@ session_start();
 require_once '../classes/controller/MesinSewaController.php';
 require_once '../classes/model/MesinSewaModel.php';
 require_once '../classes/Result.php';
+require_once '../classes/validation/FormValidator.php';
+require_once '../classes/validation/ValidationRule.php';
 
 $aksi = $_GET['aksi'];
 
@@ -12,59 +14,111 @@ $mesinSewaController = new MesinSewaController();
 $mesinSewaModel = new MesinSewaModel();
 $result = new Result();
 
+$validator = new FormValidator();
+
+$errors = array();
+
 
 switch ($aksi){
     case 'insert':
-        $tglMasuk = $_POST['tanggalMasukMesinSewa'];
-        $tglKeluar = $_POST['tanggalKeluarMesinSewa'];
+        $validator->addRule('nomorMesinSewa', 'Nomor mesin sewa mesin harus diisi', 'required');
+        $validator->addRule('jenisMesinSewa', 'Jenis mesin sewa harus diisi', 'required');
+        $validator->addRule('lokasiMesinSewa', 'Lokasi mesin sewa harus diisi', 'required');
+        $validator->addRule('statusMesinSewa', 'Status mesin sewa harus diisi', 'required');
+        $validator->addRule('tanggalMasukMesinSewa', 'Tanggal masuk mesin sewa harus diisi', 'required');
 
-        $tglMasuk = date("Y-m-d", strtotime($tglMasuk) );
+        $validator->addEntries($_POST);
+        $validator->validate();
 
-        if($tglKeluar!=null && $tglKeluar!=""){
-            $tglKeluar = date("Y-m-d", strtotime($tglKeluar) );
+        $entries = $validator->getEntries();
+
+
+        if ($validator->foundErrors()) {
+
+            $errors = $validator->getErrors();
+            $result->setMessage("Ooopss, terjadi error. Lihat pesan dibawah");
+            $result->setIsSuccess(false);
+
         }else{
-            $tglKeluar = NULL;
+
+            $tglMasuk = $entries['tanggalMasukMesinSewa'];
+            $tglKeluar = $entries['tanggalKeluarMesinSewa'];
+
+            $tglMasuk = date("Y-m-d", strtotime($tglMasuk) );
+
+            if($tglKeluar!=null && $tglKeluar!=""){
+                $tglKeluar = date("Y-m-d", strtotime($tglKeluar) );
+            }else{
+                $tglKeluar = NULL;
+            }
+
+
+            $mesinSewaModel->setNomorMesinSewa($entries['nomorMesinSewa']);
+            $mesinSewaModel->setIdJenisMesin($entries['jenisMesinSewa']);
+            $mesinSewaModel->setLokasiMesinSewa($entries['lokasiMesinSewa']);
+            $mesinSewaModel->setStatusMesinSewa($entries['statusMesinSewa']);
+            $mesinSewaModel->setTanggalMasukMesinSewa($tglMasuk);
+            $mesinSewaModel->setTanggalKeluarMesinSewa($tglKeluar);
+
+            $result = $mesinSewaController->create($mesinSewaModel);
+
         }
 
-        //die($tglKeluar);
-
-        $mesinSewaModel->setNomorMesinSewa($_POST['nomorMesinSewa']);
-        $mesinSewaModel->setIdJenisMesin($_POST['jenisMesinSewa']);
-        $mesinSewaModel->setLokasiMesinSewa($_POST['lokasiMesinSewa']);
-        $mesinSewaModel->setStatusMesinSewa($_POST['statusMesinSewa']);
-        $mesinSewaModel->setTanggalMasukMesinSewa($tglMasuk);
-        $mesinSewaModel->setTanggalKeluarMesinSewa($tglKeluar);
-
-        $result = $mesinSewaController->create($mesinSewaModel);
 
         break;
 
     case 'edit':
 
-        $tglMasuk = $_POST['tanggalMasukMesinSewa'];
-        $tglKeluar = $_POST['tanggalKeluarMesinSewa'];
+        $validator->addRule('nomorMesinSewa', 'Nomor mesin sewa mesin harus diisi', 'required');
+        $validator->addRule('jenisMesinSewa', 'Jenis mesin sewa harus diisi', 'required');
+        $validator->addRule('lokasiMesinSewa', 'Lokasi mesin sewa harus diisi', 'required');
+        $validator->addRule('statusMesinSewa', 'Status mesin sewa harus diisi', 'required');
+        $validator->addRule('tanggalMasukMesinSewa', 'Tanggal masuk mesin sewa harus diisi', 'required');
 
-        $tglMasuk = date("Y-m-d", strtotime($tglMasuk) );
+        $validator->addEntries($_POST);
+        $validator->validate();
 
-        if($tglKeluar!=null && $tglKeluar!=""){
-            $tglKeluar = date("Y-m-d", strtotime($tglKeluar) );
+        $entries = $validator->getEntries();
+
+
+        if ($validator->foundErrors()) {
+
+            $errors = $validator->getErrors();
+            $entries['idMesinSewa'] = $_GET['id'];
+            $entries['tanggalKeluarMesinSewa'] = $_POST['tanggalKeluarMesinSewa'];
+            $result->setMessage("Ooopss, terjadi error. Lihat pesan dibawah");
+            $result->setIsSuccess(false);
+
         }else{
-            $tglKeluar = NULL;
+
+
+            $tglMasuk = $entries['tanggalMasukMesinSewa'];
+            $tglKeluar = $entries['tanggalKeluarMesinSewa'];
+
+            $tglMasuk = date("Y-m-d", strtotime($tglMasuk) );
+
+            if($tglKeluar!=null && $tglKeluar!=""){
+                $tglKeluar = date("Y-m-d", strtotime($tglKeluar) );
+            }else{
+                $tglKeluar = NULL;
+            }
+
+            $tglMasuk = date("Y-m-d", strtotime($tglMasuk) );
+
+            $mesinSewaModel->setNomorMesinSewa($entries['nomorMesinSewa']);
+            $mesinSewaModel->setIdJenisMesin($entries['jenisMesinSewa']);
+            $mesinSewaModel->setLokasiMesinSewa($entries['lokasiMesinSewa']);
+            $mesinSewaModel->setStatusMesinSewa($entries['statusMesinSewa']);
+            $mesinSewaModel->setTanggalMasukMesinSewa($tglMasuk);
+            $mesinSewaModel->setTanggalKeluarMesinSewa($tglKeluar);
+            $mesinSewaModel->setIdMesinSewa($_GET['id']);
+
+            //print_r($mesinSewaModel);die();
+
+            $result = $mesinSewaController->update($mesinSewaModel);
         }
 
-        $tglMasuk = date("Y-m-d", strtotime($tglMasuk) );
 
-        $mesinSewaModel->setNomorMesinSewa($_POST['nomorMesinSewa']);
-        $mesinSewaModel->setIdJenisMesin($_POST['jenisMesinSewa']);
-        $mesinSewaModel->setLokasiMesinSewa($_POST['lokasiMesinSewa']);
-        $mesinSewaModel->setStatusMesinSewa($_POST['statusMesinSewa']);
-        $mesinSewaModel->setTanggalMasukMesinSewa($tglMasuk);
-        $mesinSewaModel->setTanggalKeluarMesinSewa($tglKeluar);
-        $mesinSewaModel->setIdMesinSewa($_GET['id']);
-
-        //print_r($mesinSewaModel);die();
-
-        $result = $mesinSewaController->update($mesinSewaModel);
 
         break;
 
@@ -88,7 +142,17 @@ switch ($aksi){
 
 $_SESSION['message'] = $result->getMessage();
 $_SESSION['success'] = $result->getisSuccess();
+$_SESSION['errors'] = $errors;
+$_SESSION['entries'] = $entries;
 
-header("Location: tampil_data_mesin_sewa.php");
+if(sizeof($errors)<=0){
+    header("Location: tampil_data_mesin_sewa.php");
+}else{
 
+    if($aksi=='insert'){
+        header("Location: tambah_data_mesin_sewa.php");
+    }else if ($aksi=='edit'){
+        header("Location: ubah_data_mesin_sewa.php");
+    }
+}
 ?>

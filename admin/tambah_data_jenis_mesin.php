@@ -33,6 +33,37 @@ include '_header.php';
                     <div class="showback">
                         <h4><i class="fa fa-angle-right"></i> Tambah Jenis Mesin</h4>
                         <hr>
+                        <?php
+
+                        if(isset($_SESSION['success'])){
+
+                            if(!$_SESSION['success']) {
+
+                                echo '<div class="alert alert-danger">'.$_SESSION['message'].'<br><br>';
+
+                                $errors = $_SESSION['errors'];
+                                if(sizeof($errors)>0){
+
+                                    foreach ($errors as $error){
+                                        echo $error;echo '<br>';
+                                    }
+
+                                }
+
+                                echo '</div>';
+
+                                $entries = $_SESSION['entries'];
+
+                            }
+
+                            unset($_SESSION['success']);
+                            unset($_SESSION['message']);
+                            unset($_SESSION['errors']);
+                            unset($_SESSION['entries']);
+
+                        }
+
+                        ?>
                         <!-- DIV FORMS -->
                         <div>
                             <form method="POST" action="proses_jenis_mesin.php?aksi=insert">
@@ -40,14 +71,14 @@ include '_header.php';
                                     <label for="jenisMesin" class="col-sm-4 col-form-label">Nama Jenis Mesin</label>
                                     <div class="col-sm-8">
                                         <input type="text" class="form-control" name="namaMesin" id="jenisMesin"
-                                               placeholder="Nama Jenis Mesin" required="required">
+                                               placeholder="Nama Jenis Mesin" required="required" value="<?php echo isset($entries['namaMesin'])? $entries['namaMesin'] : ''; ?>">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="kodeMesin" class="col-sm-4 col-form-label">Kode Jenis Mesin</label>
                                     <div class="col-sm-8">
                                         <input type="text" class="form-control" name="kodeMesin" id="kodeMesin"
-                                               placeholder="Kode Mesin" required="required">
+                                               placeholder="Kode Mesin" required="required" value="<?php echo isset($entries['kodeMesin'])? $entries['kodeMesin'] : ''; ?>">
                                     </div>
                                 </div>
                                 <div class="form-group row">
