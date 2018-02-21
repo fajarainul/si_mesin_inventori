@@ -103,9 +103,24 @@
             </tbody>
 
         </table>
+        <div style="float: right;margin-right: 300px">
+            <?php
+                $currentDate = date("d m Y");
 
 
+            ?>
+            <div style="text-align: center">
+                <p>Semarang, <?php echo tgl_indo($currentDate)?></p>
+                <p>Kepala Divisi Logistik,</p>
+                <br>
+                <br>
+                <p>Mohammad Fajar</p>
+            </div>
 
+
+        </div>
+
+        <div class="clearfix"></div>
 
         <div style="text-align: center;page-break-before: always;">
 
@@ -118,7 +133,7 @@
 
         </div>
 
-        <p style="font-size: 20px"><b>Mesin Inventori</b></p>
+        <p style="font-size: 20px"><b>Mesin Sewa</b></p>
         <table class="table table-bordered" style="font-size: 12px">
 
             <thead style="font-size: 14px">
@@ -210,9 +225,48 @@
             </tbody>
 
         </table>
+        <div style="float: right;margin-right: 300px">
+            <?php
+            $currentDate = date("d m Y");
+
+
+            ?>
+            <div style="text-align: center">
+                <p>Semarang, <?php echo tgl_indo($currentDate)?></p>
+                <p>Kepala Divisi Logistik,</p>
+                <br>
+                <br>
+                <p>Mohammad Fajar</p>
+            </div>
+
+
+        </div>
+
+        <div class="clearfix"></div>
 
     </div>
 
 </body>
 
 </html>
+
+<?php
+function tgl_indo($tanggal){
+    $bulan = array (
+        1 =>   'Januari',
+        'Februari',
+        'Maret',
+        'April',
+        'Mei',
+        'Juni',
+        'Juli',
+        'Agustus',
+        'September',
+        'Oktober',
+        'November',
+        'Desember'
+    );
+    $pecahkan = explode(' ', $tanggal);
+
+    return $pecahkan[0] . ' ' . $bulan[ (int)$pecahkan[1] ] . ' ' . $pecahkan[2];
+}
